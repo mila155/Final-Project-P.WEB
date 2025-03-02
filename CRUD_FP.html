@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 id="judul">SEBUKU</h1>
+            <h1 id="judul">SeBuku</h1>
         </div>
         <form id="donasiForm">
             <label for="nama">Nama Donatur</label>
@@ -94,8 +94,10 @@
         }
         
         function hapusDonasi(index) {
-            donasiData.splice(index, 1);
-            renderTable();
+            if (confirm("Apakah Anda yakin ingin submit data?")) {
+                donasiData.splice(index, 1);
+                renderTable();
+            }else{}
         }
     </script>
 </body>
