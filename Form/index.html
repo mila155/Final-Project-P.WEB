@@ -1,56 +1,62 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SmartFactory Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Formulir Pendaftaran Responsif</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://source.unsplash.com/1600x900/?manufacturing,factory');">
-    <div class="bg-white bg-opacity-90 rounded-lg shadow-lg flex max-w-4xl w-full">
-        <!-- Form Login -->
-        <div class="w-full md:w-1/2 p-8">
-            <h2 class="text-2xl font-bold text-center text-orange-600">Login ke SmartFactory Hub</h2>
-            <p class="text-center text-gray-500">Kelola produksi, bahan baku, dan distribusi dengan mudah</p>
-            <form id="loginForm" class="mt-4">
-                <label for="email" class="block text-gray-700 font-medium">Email</label>
-                <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none" required>
-                
-                <label for="password" class="block mt-3 text-gray-700 font-medium">Password</label>
-                <div class="relative">
-                    <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none" required>
-                    <span class="absolute inset-y-0 right-4 flex items-center cursor-pointer text-gray-500" onclick="togglePassword()">👁</span>
-                </div>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md mx-4">
+        <h1 class="text-2xl font-bold mb-6 text-center">Buat Akun</h1>
+        <form>
+            <!-- Nama Lengkap -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="nama">
+                    Nama Perusahaan
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nama" type="text" placeholder="Nama Perusahaan">
+            </div>
 
-                <button type="submit" class="w-full mt-4 bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition">Login</button>
-            </form>
-            
-            <div class="text-center my-4 text-gray-600">OR</div>
-            <p class="text-center text-gray-600">Belum punya akun? <a href="register.html" class="text-orange-600 hover:underline">Daftar di sini</a></p>
-        </div>
-        
-        <!-- Gambar Samping -->
-        <div class="hidden md:block w-1/2 bg-cover bg-center rounded-r-lg" style="background-image: url('https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <!-- Alamat -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="alamat">
+                    Alamat
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="alamat" type="text" placeholder="Alamat">
+            </div>
+
+            <!-- No. Telp -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="nomer">
+                    No. Telpon
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nomer" type="text" placeholder="Nomer">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                    Email
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email">
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                    Password
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password">
+            </div>
+
+            <!-- Tombol Daftar -->
+            <div class="flex items-center justify-center mt-5">
+                <button class="bg-purple-500 hover:bg-purple-900 text-white font-bold py-2 px-40 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Daftar
+                </button>
+            </div>
+        </form>
     </div>
-    
-    <script>
-        function togglePassword() {
-            const password = document.getElementById("password");
-            password.type = password.type === "password" ? "text" : "password";
-        }
-        
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-            
-            if (email === "admin@web.com" && password === "admin123") {
-                alert("Login berhasil!");
-                window.location.href = "dashboard.html";
-            } else {
-                alert("Email atau password salah!");
-            }
-        });
-    </script>
 </body>
 </html>
