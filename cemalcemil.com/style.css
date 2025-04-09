@@ -1,0 +1,211 @@
+/* =======================
+   General Styles
+   ======================= */
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .navbar {
+    background-color: #4CAF50;
+  }
+  
+  .navbar-brand,
+  .nav-link {
+    color: white !important;
+  }
+  
+  .nav-link:hover {
+    color: #FFD700 !important;
+  }
+  
+  /* =======================
+     Product Page Styling
+     ======================= */
+  
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .card-title {
+    font-weight: bold;
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+  }  
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Footer */
+  .custom-footer {
+    background-color: #343a40;
+  }
+  
+  .footer-link {
+    color: #ccc;
+  }
+  
+  .footer-link:hover {
+    color: #fff;
+  }
+  
+  /* =======================
+     Admin Dashboard Styling
+     ======================= */
+  
+  body.admin {
+    background-color: #f8f9fa;
+  }
+  
+  body.admin .dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  body.admin .dashboard-sidebar {
+    width: 240px;
+    background-color: #212529;
+    color: #fff;
+    padding: 2rem 1rem;
+    flex-shrink: 0;
+  }
+  
+  body.admin .dashboard-sidebar h3 {
+    color: #FFD700;
+    margin-bottom: 2rem;
+  }
+  
+  body.admin .dashboard-sidebar a {
+    color: #ccc;
+    display: block;
+    padding: 0.5rem 0;
+    margin-bottom: 0.5rem;
+    transition: 0.3s;
+  }
+  
+  body.admin .dashboard-sidebar a:hover {
+    color: #fff;
+    padding-left: 8px;
+  }
+  
+  body.admin .dashboard-content {
+    flex-grow: 1;
+    padding: 2rem;
+  }
+  
+  body.admin .dashboard-header {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  body.admin .dashboard-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  body.admin .dashboard-card h5 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  body.admin .btn-dashboard {
+    background-color: #198754;
+    color: #fff;
+    border: none;
+  }
+  
+  body.admin .btn-dashboard:hover {
+    background-color: #157347;
+  }
+
+  /* Admin Dashboard Styling */
+.admin-image {
+    width: 100px;
+    object-fit: contain;
+  }
+  
+  .text-light {
+    color: white !important;
+  }
+  
+  .bg-success {
+    background-color: #28a745 !important;
+  }
+  
+  .admin-section {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .admin-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  .admin-links a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .admin-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .admin-name {
+    text-align: center;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+  
+  .content-wrapper {
+    padding-top: 80px; /* Sesuaikan tinggi navbar kamu */
+  }
+  
+  .sticky-top {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1030;
+  }  
+
+  .card-orange {
+    background-color: #FFE5B4; /* oranye cerah */
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    height: 100%;
+  }
+
+  .card-orange:hover {
+    transform: scale(1.03);
+  }
+
+  .card-orange img {
+    max-height: 200px;
+    object-fit: contain;
+  }
+
+  
