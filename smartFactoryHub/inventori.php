@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Inventaris</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-10">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold text-center text-orange-600 mb-4">Manajemen Inventaris</h2>
+        
+        <form id="inventoryForm" class="mb-4" onsubmit="event.preventDefault(); validateForm();">
+            <div class="gap-4">
+                <div>
+                    <label class="block text-gray-700">Nama Barang:</label>
+                    <input type="text" id="nama" class="w-full px-3 py-2 mb-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Kategori:</label>
+                    <select id="kategori" class="w-full px-3 py-2 mb-3 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none">
+                        <option value="Bahan Baku">Bahan Baku</option>
+                        <option value="Produk Jadi">Produk Jadi</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-gray-700">Jumlah:</label>
+                    <input type="number" id="jumlah" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Satuan:</label>
+                    <select id="satuan" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none">
+                        <option value="Kg">Kg</option>
+                        <option value="Pcs">Pcs</option>
+                        <option value="Liter">Liter</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-gray-700">Harga (Rp):</label>
+                    <input type="number" id="harga" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none">
+                </div>
+                <div class="flex items-end">
+                    <button type="submit" class="bg-orange-400 text-white px-4 py-2 rounded-lg w-full">Tambah</button>
+                </div>
+            </div>
+        </form>
+        
+        <table class="w-full border-collapse border border-gray-300">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="font-medium border border-white rounded-sm">Nama</th>
+                    <th class="font-medium border border-white rounded-sm">Kategori</th>
+                    <th class="font-medium border border-white rounded-sm">Jumlah</th>
+                    <th class="font-medium border border-white rounded-sm">Harga</th>
+                    <th class="font-medium border border-white rounded-sm">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="inventoryTable">
+            </tbody>
+        </table>
+
+        <script>
+        function validateForm() {
+            let nama = document.getElementById("nama").value;
+            let kategori = document.getElementById("kategori").value;
+            let jumlah = document.getElementById("jumlah").value;
+            let satuan = document.getElementById("satuan").value;
+            let harga = document.getElementById("harga").value;
+            
+            if (nama.trim() === "" || jumlah.trim() === "" || harga.trim() === "") {
+                alert("Harap isi semua kolom!");
+                return false;
+            }
+            
+            if (jumlah <= 0 || harga <= 0) {
+                alert("Jumlah dan harga harus lebih dari 0!");
+                return false;
+            }
+            
+            let table = document.getElementById("inventoryTable");
+            let newRow = table.insertRow(-1);
+            newRow.innerHTML = `<td class='border px-4 py-2'>${nama}</td>
+                                <td class='border px-4 py-2'>${kategori}</td>
+                                <td class='border px-4 py-2'>${jumlah} ${satuan}</td>
+                                <td class='border px-4 py-2'>Rp ${parseInt(harga).toLocaleString()}</td>
+                                <td class='border px-4 py-2 text-center'><button class='bg-red-500 text-white px-2 py-1 rounded' onclick='hapusRow(this)'>Hapus</button></td>`;
+            document.getElementById("inventoryForm").reset();
+        }
+        
+        function hapusRow(button) {
+            let row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+    </div>
+</body>
+</html>
