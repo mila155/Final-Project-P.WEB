@@ -4,133 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../style.css">
-    <style>
-        body {
-            background-color: #f3f3f3;
-            color: #222;
-        }
-        .navbar {
-            background-color: #4CAF50 !important; /* green leaf */
-        }
-        .navbar .nav-link {
-            color: white;
-        }
-        .navbar .nav-link:hover {
-            color: #FFD700; /* golden yellow */
-        }
-        .admin-section {
-            background-color: #646e76; /* dark gray */
-            padding: 20px;
-        }
-        .admin-section img {
-            width: 80px;
-            border-radius: 10px;
-        }
-        .admin-name {
-            color: #fff;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .admin-buttons a {
-            display: inline-block;
-            margin: 5px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: all 0.2s ease-in-out;
-        }
-        .admin-buttons a:hover {
-            background-color: #3e8e41;
-            color: #FFD700;
-        }
-    </style>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<body class="bg-gray-100 text-gray-800 font-sans">
 
-<body class="admin">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid justify-content-between">
-            <div class="d-flex align-items-center">
-                <img src="../img/logo.png" alt="logo" class="img-fluid me-2" style="max-width: 40px;">
-                <a class="navbar-brand text-white fw-bold" href="#">Banana</a>
+    <div class="bg-green-700 sticky top-0 shadow-md z-[1030]">
+        <nav class="container mx-auto flex items-center justify-between px-4 py-3">
+            <!-- Logo & Text -->
+            <div class="flex items-center space-x-4">
+                <img src="./img/logo.png" alt="logo" class="h-12">
+                <a href="#" class="text-white font-bold text-xl no-underline">Banana</a>
             </div>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Welcome Guest</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- Navbar End -->
+            <div class="flex items-end">
+                <a href="#" class="text-white hover:text-yellow-300">Welcome Guest</a>
+            </div>
+        </nav>
+    </div>
 
     <!-- Header -->
-    <div class="bg-light text-center py-3">
-        <h3 class="fw-semibold">Manage Details</h3>
+    <div class="bg-gray-200 text-center py-3">
+        <h3 class="text-xl font-semibold">Manage Details</h3>
     </div>
-    <!-- Header End -->
 
     <!-- Admin Section -->
-    <div class="admin-section d-flex flex-wrap align-items-center justify-content-start">
-        <div class="text-center me-4">
-            <img src="../img/1.jpg" alt="admin-photo">
-            <p class="admin-name">Admin Name</p>
+    <div class="bg-gray-700 flex flex-wrap items-start gap-6 px-6 py-6">
+        <div class="text-center">
+            <img src="img/1.jpg" alt="admin-photo" class="w-20 rounded-lg">
+            <p class="text-white font-bold mt-2">Admin Name</p>
         </div>
-
-        <div class="admin-buttons">
-            <a href="#">Inventaris</a>
-            <a href="#">Penjualan</a>
-            <a href="#">Keuangan</a>
-            <a href="#">Produk</a>
-            <a href="#">List User</a>
-            <a href="#">Log Out</a>
+        <div class="flex flex-wrap gap-3">
+            <a href="produk.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Produk</a>
+            <a href="stok.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Stok Produk</a>
+            <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Penjualan</a>
+            <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Keuangan</a>
+            <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Daftar Pelanggan</a>
+            <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Kelola Admin</a>
+            <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Keluar</a>
         </div>
     </div>
-    <!-- Admin Section End -->
-
-        <!-- footer -->
-  <footer class="custom-footer text-white py-5 mt-auto">
-  <div class="container">
-    <div class="row gy-4">
-      <div class="col-md-3">
-        <h4 class="text-success fw-bold">Banana</h4>
-        <p>Banana - produsen keripik pisang, granola, cookies granola, dan tepung pisang</p>
-        <div class="d-flex gap-3">
-          <a href="#"><i class="fab fa-instagram text-white fs-4"></i></a>
-          <a href="#"><i class="fab fa-facebook text-white fs-4"></i></a>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <h6 class="fw-bold">Pages</h6>
-        <ul class="list-unstyled">
-          <li><a href="#" class="footer-link">Our Product</a></li>
-          <li><a href="#" class="footer-link">About us</a></li>
-          <li><a href="#" class="footer-link">Cart</a></li>
-          <li><a href="#" class="footer-link">Contact</a></li>
-        </ul>
-      </div>
-
-      <div class="col-md-3">
-        <h6 class="fw-bold">Our info</h6>
-        <p><span class="text-warning">6288888888</span><br>
-          <a href="mailto:bumiraya@banana.com" class="footer-link">bumiraya@banana.com</a><br>
-          Jl. Rungkut Madya, Gn. Anyar, Kec. Gn. Anyar,<br>
-          Surabaya, Jawa Timur 60294, Indonesia
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
-<!-- footer end -->
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
