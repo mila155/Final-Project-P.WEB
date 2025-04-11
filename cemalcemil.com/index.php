@@ -47,7 +47,7 @@
               <a class="nav-link" href="#">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Register</a>
+              <a class="nav-link" href="register.php">Register</a>
             </li>
           </ul>
         </div>
