@@ -4,7 +4,7 @@ $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Koneksi
-  $conn = new mysqli("localhost", "root", "", "smartfactoryhub");
+  $conn = new mysqli("localhost", "root", "", "cemal_cemil");
   if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
   }
@@ -15,10 +15,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $user_telp = $_POST['user_telp'];
   $user_email = $_POST['user_email'];
   $user_password = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
+  $role = $_POST['role'];
 
   // Simpan ke DB
-  $sql = "INSERT INTO pengguna (user_name, user_email, user_password, user_telp, user_add) 
-          VALUES ('$user_name', '$user_email', '$user_password', '$user_telp', '$user_add')";
+  $sql = "INSERT INTO pengguna (user_name, user_email, user_password, user_telp, user_add, role) 
+          VALUES ('$user_name', '$user_email', '$user_password', '$user_telp', '$user_add', '$role')";
 
   if ($conn->query($sql) === TRUE) {
     $success = true;
@@ -40,6 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div class="bg-white shadow-lg rounded-lg flex w-full max-w-4xl overflow-hidden">
+
+    <!-- form section -->
     <div class="w-full md:w-1/2 p-8">
       <h2 class="text-2xl font-bold text-green-700 mb-2 text-center">Register Akun Cemal Cemil</h2>
       <p class="text-sm text-gray-500 mb-6 text-center">Daftar untuk melihat toko ini</p>
@@ -65,11 +68,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="email" name="user_email" placeholder="Email" required class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500" />
         <label class="block text-gray-700 text-sm font-bold" for="nama">Password</label>
         <input type="password" name="user_password" placeholder="Password" required class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500" />
+        <label class="block text-gray-700 text-sm font-bold">Role</label>
+        <select name="role" required class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
         <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md font-semibold">Daftar</button>
       </form>
       <p class="text-center text-gray-600 mt-4">Sudah punya akun? <a href="login.php" class="text-green-600 hover:underline">Login</a></p>
     </div>
-    <div class="hidden md:block w-1/2 bg-cover bg-center rounded-r-lg" style="background-image: url('https://unsplash.com/photos/burger-and-fries-on-white-ceramic-plate-vR-IS9aCyHw ');"></div>
+    <div class="hidden md:block w-1/2 rounded-r-lg flex items-center justify-center p-4">
+  <img src="./img/logonew.png" alt="Logo" class="object-contain h-full w-full">
+</div>
   </div>
 </body>
 </html>

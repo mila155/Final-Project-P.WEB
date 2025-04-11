@@ -40,7 +40,7 @@
 <?php
 // Proses Login
 if (isset($_POST['login'])) {
-    $conn = new mysqli("localhost", "root", "", "smartfactoryhub");
+    $conn = new mysqli("localhost", "root", "", "cemal_cemil");
 
     if ($conn->connect_error) {
         die("Koneksi gagal: " . $conn->connect_error);
@@ -56,10 +56,19 @@ if (isset($_POST['login'])) {
     if ($result && $result->num_rows === 1) {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['user_password'])) {
-            echo "<script>alert('Login berhasil!'); window.location.href = 'index.php';</script>";
-        } else {
-            echo "<script>alert('Password salah!');</script>";
-        }
+
+           // Mulai session dan simpan data user
+          session_start();
+          $_SESSION['user_id'] = $user['id']; // pastikan kolomnya benar, bisa juga user_id
+          $_SESSION['user_name'] = $user['user_name'];
+          $_SESSION['role'] = $user['role'];
+
+          if ($user['role'] == 'admin') {
+              echo "<script>alert('Login berhasil sebagai Admin!'); window.location.href = 'dashboardAdmin.php';</script>";
+          } else {
+              echo "<script>alert('Login berhasil sebagai User!'); window.location.href = 'index.php';</script>";
+          }
+      }      
     } else {
         echo "<script>alert('Email tidak ditemukan!');</script>";
     }
