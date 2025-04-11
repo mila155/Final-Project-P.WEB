@@ -6,7 +6,7 @@
   <title>Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://source.unsplash.com/1600x900/?manufacturing,factory');">
+<body class="bg-gray-100 h-screen flex items-center justify-center bg-cover bg-center">
   <div class="bg-white bg-opacity-90 rounded-lg shadow-lg flex max-w-4xl w-full">
     
     <!-- Form Login -->
@@ -32,7 +32,9 @@
     </div>
 
     <!-- Gambar Samping -->
-    <div class="hidden md:block w-1/2 bg-cover bg-center rounded-r-lg" style="background-image: url('https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=1974');"></div>
+    <div class="hidden md:block w-1/2 bg-cover bg-center rounded-r-lg">
+    <img src="./img/logonew.png" alt="Logo" class="object-contain h-full w-full">
+    </div>
   </div>
 </body>
 </html>
