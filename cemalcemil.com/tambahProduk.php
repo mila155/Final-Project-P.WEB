@@ -1,3 +1,29 @@
+<?php 
+include_once("service/koneksi.php");
+
+$produk = $conn->query("SELECT * FROM produk");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $kode = $_POST['kode'];
+    $nama = $_POST['nama'];
+    $stok = $_POST['stok'];
+    $kuantitas = $_POST['kuantitas'];
+    $satuan = $_POST['satuan'];
+    $harga_jual = $_POST['hargaJ'];
+    $harga_produksi = $_POST['hargaP'];
+    $deskripsi = $_POST['deskripsi'];
+
+    $query="INSERT INTO produk (kode_produk,nama_produk,stok,kuantitas_produk,satuan,harga_jual,harga_produksi,deskripsi) VALUE 
+    ('$kode','$nama','$stok','$kuantitas','$satuan','$harga_jual','$harga_produksi','$deskripsi')";
+    $hasil=mysqli_query($conn,$query);
+    
+    if ($hasil) {
+        header('location:produkAdmin.php');
+    } else {
+        echo "input data gagal";
+    }
+} ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -9,7 +35,7 @@
 <body class="bg-gray-100 p-10">
     <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
         <h2 class="text-2xl font-bold text-center text-green-700 mb-4">Data Produk</h2>
-        <form id="inventoryForm" method="post" action="prosesTambahProduk.php" class="mb-4">
+        <form id="inventoryForm" method="post" class="mb-4">
             <div class="gap-4">
                 <div class="my-1 mx-3">
                     <label for="kode" class="block text-gray-700 mb-1">Kode Produk :</label>
@@ -18,6 +44,10 @@
                 <div class="my-1 mx-3">
                     <label for="nama" class="block text-gray-700 mb-1">Nama Produk :</label>
                     <input type="text" name="nama" class="w-full px-3 py-2 mb-2 border rounded-lg focus:ring-2 focus:ring-green-700 outline-none" placeholder="Nama">
+                </div>
+                <div class="my-1 mx-3">
+                    <label for="stok" class="block text-gray-700 mb-1">Stok Produk :</label>
+                    <input type="number" name="stok" class="w-full px-3 py-2 mb-2 border rounded-lg focus:ring-2 focus:ring-green-700 outline-none" placeholder="Stok">
                 </div>
                 <div class="my-1 mx-3">
                     <label for="kuantitas" class="block text-gray-700 mb-1">Kuantitas produk :</label>

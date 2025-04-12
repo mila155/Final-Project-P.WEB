@@ -22,7 +22,7 @@
                 <div class="gap-4">
                 <div class="hidden">
                         <label for="id" class="block text-gray-700 mb-1"></label>
-                        <input type="number" name="id" class="w-full px-3 py-2 mb-2 border rounded-lg focus:ring-2 focus:ring-green-700 outline-none" placeholder="Kode" value="<?php echo $data['kode_produk'] ?>" readonly>
+                        <input type="number" name="id" class="w-full px-3 py-2 mb-2 border rounded-lg focus:ring-2 focus:ring-green-700 outline-none" value="<?php echo $data['id'] ?>">
                     </div>
                     <div class="my-1 mx-3">
                         <label for="kode" class="block text-gray-700 mb-1">Kode Produk :</label>
@@ -31,6 +31,10 @@
                     <div class="my-1 mx-3">
                         <label for="nama" class="block text-gray-700 mb-1">Nama Produk :</label>
                         <input type="text" name="nama" class="w-full px-3 py-2 mb-2 border rounded-lg focus:ring-2 focus:ring-green-700 outline-none" placeholder="Nama" value="<?php echo $data['nama_produk'] ?>">
+                    </div>
+                    <div class="my-1 mx-3">
+                        <label for="stok" class="block text-gray-700 mb-1">Stok Produk :</label>
+                        <input type="number" name="stok" class="w-full px-3 py-2 mb-2 border rounded-lg focus:ring-2 focus:ring-green-700 outline-none" placeholder="Stok" value="<?php echo $data['stok'] ?>">
                     </div>
                     <div class="my-1 mx-3">
                         <label for="kuantitas" class="block text-gray-700 mb-1">Kuantitas produk :</label>
@@ -56,7 +60,7 @@
                         <input type="text" name="deskripsi" class="w-full px-3 py-2 mb-4 border rounded-lg focus:ring-2 focus:ring-green-700 outline-none" placeholder="Deskripsi" value="<?php echo $data['deskripsi'] ?>">
                     </div>
                     <div class="flex items-end w-full m-2">
-                        <button type="submit" class="bg-green-700 text-white px-4 py-2 rounded-lg mr-2" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Ubah</button>
+                        <button type="submit" class="bg-green-700 text-white px-4 py-2 rounded-lg mr-2" onclick="return confirm('Apakah Anda yakin ingin mengubah data ini?')">Ubah</button>
                         <a href="produkAdmin.php" class="inline-block bg-green-700 text-white px-4 py-2 rounded-lg transition duration-700 ease-in-out">Kembali</a>
                     </div>
                 </div>

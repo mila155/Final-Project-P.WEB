@@ -10,6 +10,7 @@ if (!isset($_POST['id']) || empty($_POST['id'])) {
 $id = $_POST['id'];
 $kode = $_POST['kode'];
 $nama = $_POST['nama'];
+$stok = $_POST['stok'];
 $kuantitas = $_POST['kuantitas'];
 $satuan = $_POST['satuan'];
 $harga_jual = $_POST['hargaJ'];
@@ -17,8 +18,8 @@ $harga_produksi = $_POST['hargaP'];
 $deskripsi = $_POST['deskripsi'];
 
 // Gunakan prepared statement untuk keamanan
-$query = $conn->prepare("UPDATE produk SET kode_produk=?, nama_produk=?, kuantitas_produk=?, satuan=?, harga_jual=?, harga_produksi=?, deskripsi=? WHERE id=?");
-$query->bind_param("ssisddsi", $kode, $nama, $kuantitas, $satuan, $harga_jual, $harga_produksi, $deskripsi ,$id);
+$query = $conn->prepare("UPDATE produk SET kode_produk=?, nama_produk=?, stok=?, kuantitas_produk=?, satuan=?, harga_jual=?, harga_produksi=?, deskripsi=? WHERE id=?");
+$query->bind_param("ssiisddsi", $kode, $nama, $stok, $kuantitas, $satuan, $harga_jual, $harga_produksi, $deskripsi ,$id);
 
 // Eksekusi query
 $hasil = $query->execute();

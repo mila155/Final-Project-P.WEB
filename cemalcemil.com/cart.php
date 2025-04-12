@@ -1,5 +1,5 @@
 <?php
-require 'koneksi.php';
+require 'service/koneksi.php';
 require 'produklist.php'; // file yang berisi $produkList[]
 
 $id = $_GET['id'] ?? null;

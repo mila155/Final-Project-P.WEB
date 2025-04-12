@@ -1,5 +1,5 @@
 <?php
-require 'koneksi.php';
+require 'service/koneksi.php';
 
 $items = $conn->query("SELECT * FROM keranjang");
 $keranjang = [];

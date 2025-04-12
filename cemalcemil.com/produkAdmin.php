@@ -1,6 +1,6 @@
 <?php 
 include_once ("service/koneksi.php");
-$query= "SELECT id, kode_produk, nama_produk, kuantitas_produk, satuan, harga_jual, deskripsi FROM produk";
+$query= "SELECT id, kode_produk, nama_produk, stok, kuantitas_produk, satuan, harga_jual, deskripsi FROM produk";
 $hasil= mysqli_query ($conn, $query);
  ?>
 <!DOCTYPE html>
@@ -22,6 +22,7 @@ $hasil= mysqli_query ($conn, $query);
                     <tr class="bg-green-300 text-gray-700">
                         <th scope="col" class="font-bold border border-gray-400 rounded-sm text-center">Kode</th>
                         <th scope="col" class="font-bold border border-gray-400 rounded-sm text-center">Nama</th>
+                        <th scope="col" class="font-bold border border-gray-400 rounded-sm text-center">Stok</th>
                         <th scope="col" class="font-bold border border-gray-400 rounded-sm text-center">Kuantitas</th>
                         <th scope="col" class="font-bold border border-gray-400 rounded-sm text-center">Satuan Kuantitas</th>
                         <th scope="col" class="font-bold border border-gray-400 rounded-sm text-center">Harga</th>
@@ -39,6 +40,9 @@ $hasil= mysqli_query ($conn, $query);
                     </td>
                     <td class="px-4 py-2 border max-w-xs overflow-hidden text-ellipsis whitespace-nowrap break-words">
                         <?php echo htmlspecialchars($data['nama_produk']); ?>
+                    </td>
+                    <td class="px-4 py-2 border max-w-xs overflow-hidden text-ellipsis whitespace-nowrap break-words">
+                        <?php echo htmlspecialchars($data['stok']); ?>
                     </td>
                     <td class="px-4 py-2 border max-w-xs overflow-hidden text-ellipsis whitespace-nowrap break-words">
                         <?php echo htmlspecialchars($data['kuantitas_produk']); ?>

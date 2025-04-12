@@ -1,5 +1,5 @@
 <?php
-require 'koneksi.php';
+require 'service/koneksi.php';
 
 $id = $_POST['id'] ?? null;
 $jumlah = $_POST['jumlah'] ?? null;
