@@ -42,12 +42,7 @@
 <?php
 // Proses Login
 if (isset($_POST['login'])) {
-    $conn = new mysqli("localhost", "root", "", "cemal_cemil");
-
-    if ($conn->connect_error) {
-        die("Koneksi gagal: " . $conn->connect_error);
-    }
-
+    include_once("service/koneksi.php");
     $email = $_POST['email'];
     $password = $_POST['password'];
 

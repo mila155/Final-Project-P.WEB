@@ -4,10 +4,7 @@ $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Koneksi
-  $conn = new mysqli("localhost", "root", "", "cemal_cemil");
-  if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-  }
+  include_once("service/koneksi.php");
 
   // Ambil data dari form
   $user_name = $_POST['user_name'];

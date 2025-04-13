@@ -75,8 +75,13 @@
                 <input type="date" name="tanggal_akhir" class="border rounded px-2 py-1" value="<?php echo $_GET['tanggal_akhir'] ?? ''; ?>">
             </div>
             <div class="flex items-end">
-                <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Filter</button>
+                <button type="submit" class="bg-yellow-400 text-white px-4 py-2 rounded hover:bg-yellow-500">Filter</button>
             </div>
+            <form action="export_stok_pdf.php" method="POST" target="_blank" class="flex justify-center mt-2">
+                <input type="hidden" name="tanggal_awal" value="<?php echo $tanggal_awal; ?>">
+                <input type="hidden" name="tanggal_akhir" value="<?php echo $tanggal_akhir; ?>">
+                <button type="submit" class="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-500">Export PDF</button>
+            </form>
         </form>
 
         <div class="overflow-x-auto">
@@ -97,18 +102,25 @@
                     <?php 
                     $no = 1;
                     while ($data = mysqli_fetch_assoc($hasil)) {
+                        $id_produk = $data['kode_produk']; // asumsi kode_produk adalah identifier unik
                         $stok_awal = $data['stok_awal_db'];
-                        $stok_akhir = $stok_awal + $data['total_masuk'] - $data['total_keluar'];
+                        $total_masuk = $data['total_masuk'];
+                        $total_keluar = $data['total_keluar'];
+                        $stok_akhir = $stok_awal + $total_masuk - $total_keluar;
+
+                        // Update stok akhir ke tabel produk
+                        $query_update = "UPDATE produk SET stok_akhir = $stok_akhir WHERE kode_produk = '$id_produk'";
+                        mysqli_query($conn, $query_update);
                     ?>
                     <tr>
-                    <td class="border px-4 py-2"><?php echo $no++; ?></td>
-                    <td class="border px-4 py-2"><?php echo htmlspecialchars($data['kode_produk']); ?></td>
-                    <td class="border px-4 py-2"><?php echo htmlspecialchars($data['nama_produk']); ?></td>
-                    <td class="border px-4 py-2"><?php echo $stok_awal; ?></td>
-                    <td class="border px-4 py-2"><?php echo $data['total_masuk']; ?></td>
-                    <td class="border px-4 py-2"><?php echo $data['total_keluar']; ?></td>
-                    <td class="border px-4 py-2"><?php echo $stok_akhir; ?></td>
-                    <td class="border px-4 py-2"><?php echo $data['tanggal_terakhir_masuk']; ?></td>
+                        <td class="border px-4 py-2"><?php echo $no++; ?></td>
+                        <td class="border px-4 py-2"><?php echo htmlspecialchars($data['kode_produk']); ?></td>
+                        <td class="border px-4 py-2"><?php echo htmlspecialchars($data['nama_produk']); ?></td>
+                        <td class="border px-4 py-2"><?php echo $stok_awal; ?></td>
+                        <td class="border px-4 py-2"><?php echo $total_masuk; ?></td>
+                        <td class="border px-4 py-2"><?php echo $total_keluar; ?></td>
+                        <td class="border px-4 py-2"><?php echo $stok_akhir; ?></td>
+                        <td class="border px-4 py-2"><?php echo htmlspecialchars($data['tanggal_terakhir_masuk']); ?></td>
                     </tr>
                     <?php } ?>
                 </tbody>

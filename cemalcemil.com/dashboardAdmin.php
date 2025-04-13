@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $conn = new mysqli("localhost", "root", "", "cemal_cemil");
+    include_once("service/koneksi.php");
 
     // Orders Summary
     $orders_total = $conn->query("SELECT COUNT(*) as total FROM pesanan")->fetch_assoc()['total'];
