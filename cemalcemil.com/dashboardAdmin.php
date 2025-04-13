@@ -111,8 +111,8 @@
                 </a>
         </div>
         <div class="flex flex-wrap gap-3">
-            <a href="produk.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Produk</a>
-            <a href="stok.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Stok Produk</a>
+            <a href="produkAdmin.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Produk</a>
+            <a href="historyStok.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Stok Produk</a>
             <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Penjualan</a>
             <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Keuangan</a>
             <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Daftar Pelanggan</a>
