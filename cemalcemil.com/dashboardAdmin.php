@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $conn = new mysqli("localhost", "root", "", "cemal_cemil");
 
     // Orders Summary
@@ -85,11 +86,14 @@
             <!-- Logo & Text -->
             <div class="flex items-center space-x-4">
                 <img src="./img/logo.png" alt="logo" class="h-12">
-                <a href="#" class="text-white font-bold text-xl no-underline">Banana</a>
+                <a href="#" class="text-white font-bold text-xl no-underline">Cemal-Cemil</a>
             </div>
             <div class="flex items-end">
-                <a href="#" class="text-white hover:text-yellow-300">Welcome Guest</a>
+                <a href="#" class="text-white hover:text-yellow-300">
+                Welcome, <?= isset($_SESSION['user_name']) ? htmlspecialchars($_SESSION['user_name']) : 'Guest' ?>
+                </a>
             </div>
+
         </nav>
     </div>
 
@@ -102,7 +106,9 @@
     <div class="bg-gray-700 flex flex-wrap items-start gap-6 px-6 py-6">
         <div class="text-center">
             <img src="img/1.jpg" alt="admin-photo" class="w-20 rounded-lg">
-            <p class="text-white font-bold mt-2">Admin Name</p>
+            <a href="#" class="text-white hover:text-yellow-300">
+                Admin <?= isset($_SESSION['user_name']) ? htmlspecialchars($_SESSION['user_name']) : 'Guest' ?>
+                </a>
         </div>
         <div class="flex flex-wrap gap-3">
             <a href="produk.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Produk</a>
@@ -111,7 +117,7 @@
             <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Keuangan</a>
             <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Daftar Pelanggan</a>
             <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Kelola Admin</a>
-            <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Keluar</a>
+            <a href="logout.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Keluar</a>
         </div>
     </div>
     <!-- Informasi singkat -->
