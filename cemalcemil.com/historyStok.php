@@ -49,7 +49,7 @@ $query = $conn->query($sql);
 <body class="bg-gray-100 ">
 <div class="bg-green-700 sticky top-0 shadow-md z-[1030]">
     <nav class="container mx-auto flex items-center justify-center p-4">
-        <a href="adminTailwind.php" class="bg-green-600 mr-4 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Kembali</a>
+        <a href="dashboardAdmin.php" class="bg-green-600 mr-4 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Kembali</a>
         <a href="tambahStok.php" class="bg-green-600 mr-4 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Tambah Stok</a>
         <a href="historyStok.php" class="bg-green-600 mr-4 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Histori</a>
         <a href="stok.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Laporan Manajemen</a>
