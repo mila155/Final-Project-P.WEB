@@ -1,3 +1,45 @@
+<?php
+// Proses Login
+session_start();
+if (isset($_POST['login'])) {
+    include_once("service/koneksi.php");
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Cek user berdasarkan email
+    $query = "SELECT * FROM pengguna WHERE user_email = '$email'";
+    $result = $conn->query($query);
+
+    if ($result && $result->num_rows === 1) {
+      $user = $result->fetch_assoc();
+      if (password_verify($password, $user['user_password'])) {
+
+          $_SESSION['user_id'] = $user['user_id'];
+          $_SESSION['user_name'] = $user['user_name'];
+          $_SESSION['role'] = $user['role'];
+
+          if ($user['role'] == 'superadmin') {
+              echo "<script>alert('Login berhasil sebagai Superadmin!'); window.location.href = 'dashboardAdmin.php';</script>";
+              exit;
+          } elseif ($user['role'] == 'admin') {
+              echo "<script>alert('Login berhasil sebagai Admin!'); window.location.href = 'dashboardAdmin.php';</script>";
+              exit;
+          } else {
+              echo "<script>alert('Login berhasil sebagai User!'); window.location.href = 'index.php';</script>";
+              exit;
+          }
+      } else {
+          echo "<script>alert('Password salah!');</script>";
+      }
+  } else {
+      echo "<script>alert('Email tidak ditemukan!');</script>";
+  }
+
+  $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -38,43 +80,3 @@
   </div>
 </body>
 </html>
-
-<?php
-// Proses Login
-if (isset($_POST['login'])) {
-    $conn = new mysqli("localhost", "root", "", "cemal_cemil");
-
-    if ($conn->connect_error) {
-        die("Koneksi gagal: " . $conn->connect_error);
-    }
-
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    // Cek user berdasarkan email
-    $query = "SELECT * FROM pengguna WHERE user_email = '$email'";
-    $result = $conn->query($query);
-
-    if ($result && $result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-        if (password_verify($password, $user['user_password'])) {
-
-           // Mulai session dan simpan data user
-          session_start();
-          $_SESSION['user_id'] = $user['id']; // pastikan kolomnya benar, bisa juga user_id
-          $_SESSION['user_name'] = $user['user_name'];
-          $_SESSION['role'] = $user['role'];
-
-          if ($user['role'] == 'admin') {
-              echo "<script>alert('Login berhasil sebagai Admin!'); window.location.href = 'dashboardAdmin.php';</script>";
-          } else {
-              echo "<script>alert('Login berhasil sebagai User!'); window.location.href = 'index.php';</script>";
-          }
-      }      
-    } else {
-        echo "<script>alert('Email tidak ditemukan!');</script>";
-    }
-
-    $conn->close();
-}
-?>

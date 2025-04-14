@@ -4,10 +4,7 @@ $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Koneksi
-  $conn = new mysqli("localhost", "root", "", "cemal_cemil");
-  if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-  }
+  include_once("service/koneksi.php");
 
   // Ambil data dari form
   $user_name = $_POST['user_name'];
@@ -15,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $user_telp = $_POST['user_telp'];
   $user_email = $_POST['user_email'];
   $user_password = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
-  $role = $_POST['role'];
+  $role = 'user';
 
   // Simpan ke DB
   $sql = "INSERT INTO pengguna (user_name, user_email, user_password, user_telp, user_add, role) 
@@ -68,11 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="email" name="user_email" placeholder="Email" required class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500" />
         <label class="block text-gray-700 text-sm font-bold" for="nama">Password</label>
         <input type="password" name="user_password" placeholder="Password" required class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500" />
-        <label class="block text-gray-700 text-sm font-bold">Role</label>
-        <select name="role" required class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500">
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
         <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md font-semibold">Daftar</button>
       </form>
       <p class="text-center text-gray-600 mt-4">Sudah punya akun? <a href="login.php" class="text-green-600 hover:underline">Login</a></p>

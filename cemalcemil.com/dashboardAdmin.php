@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $conn = new mysqli("localhost", "root", "", "cemal_cemil");
+    include_once("service/koneksi.php");
 
     // Orders Summary
     $orders_total = $conn->query("SELECT COUNT(*) as total FROM pesanan")->fetch_assoc()['total'];
@@ -116,7 +116,7 @@
             <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Penjualan</a>
             <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Keuangan</a>
             <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Daftar Pelanggan</a>
-            <a href="#" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Kelola Admin</a>
+            <a href="tambahAdmin.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Kelola Admin</a>
             <a href="logout.php" class="bg-green-600 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Keluar</a>
         </div>
     </div>
