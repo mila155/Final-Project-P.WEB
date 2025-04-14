@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include 'layout/header.php'; ?>
 
 
   <!-- Main Content -->
@@ -23,7 +23,7 @@
     </section>
   </div>
 
- <?php include 'footer.php'; ?>
+ <?php include 'layout/footer.php'; ?>
 
  </body>
 </html>
