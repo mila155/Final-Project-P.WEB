@@ -1,6 +1,17 @@
 <?php
+
 require 'service/koneksi.php';
 
+// Cek apakah user sudah login
+session_start();
+if (!isset($_SESSION['id_user']) && $_SESSION['user_id'] == '') {
+  echo "<script>alert('Silakan login terlebih dahulu!'); window.location='login.php';</script>";
+  exit;
+}
+
+$id_user = $_SESSION['user_id'];
+
+// Ambil isi keranjang
 $items = $conn->query("SELECT * FROM keranjang");
 $keranjang = [];
 $totalBayar = 0;
@@ -16,14 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $alamat = $_POST['alamat'];
   $kontak = $_POST['kontak'];
 
-  $stmt = $conn->prepare("INSERT INTO pesanan (nama, alamat, kontak) VALUES (?, ?, ?)");
-  $stmt->bind_param("sss", $nama, $alamat, $kontak);
+  $stmt = $conn->prepare("INSERT INTO pesanan (id_user, nama, alamat, kontak) VALUES (?, ?, ?, ?)");
+  $stmt->bind_param("isss", $id_user, $nama, $alamat, $kontak);
   $stmt->execute();
   $pesananId = $conn->insert_id;
 
   foreach ($keranjang as $item) {
-    $stmtDetail = $conn->prepare("INSERT INTO pesanan_detail (pesanan_id, produk_id, nama, harga, jumlah) VALUES (?, ?, ?, ?, ?)");
-    $stmtDetail->bind_param("issii", $pesananId, $item['produk_id'], $item['nama'], $item['harga'], $item['jumlah']);
+    $stmtDetail = $conn->prepare("INSERT INTO pesanan_detail (pesanan_id, produk_id, harga, jumlah) VALUES (?, ?, ?, ?)");
+    $stmtDetail->bind_param("isii", $pesananId, $item['produk_id'], $item['harga'], $item['jumlah']);
     $stmtDetail->execute();
   }
 
