@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pengguna;
+use App\Models\User;
+use App\Models\Produk;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,9 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Pengguna::factory(10)->create();
-
         $this->call(ProdukSeeder::class);
-        $this->call(PenggunaSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

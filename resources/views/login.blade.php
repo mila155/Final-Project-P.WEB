@@ -53,10 +53,8 @@
 
     <!-- Gambar Samping -->
     <div class="hidden md:block w-1/2 bg-cover bg-center rounded-r-lg">
-    <img src="./img/logonew.png" alt="Logo" class="object-contain h-full w-full">
+    <img src="./img/logolengkapnew.png" alt="Logo" class="object-contain">
     </div>
   </div>
 </body>
 </html>
-
-

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Pengguna;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
@@ -17,26 +17,44 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'user_email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $user = User::where('user_email', $request->email)->first();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            $user = Auth::user();
+        if ($user && Hash::check($request->password, $user->user_password)) {
+            session([
+                'user_id' => $user->user_id,
+                'user_name' => $user->user_name,
+                'role' => $user->role
+            ]);
 
             if ($user->role === 'superadmin' || $user->role === 'admin') {
-                return redirect()->intended('/dashboardAdmin')->with('success', 'Login berhasil sebagai ' . ucfirst($user->role));
+                return redirect('dashboardAdmin')->with('success', 'Login berhasil sebagai ' . ucfirst($user->role));
+            } else {
+                return redirect('/')->with('success', 'Login berhasil sebagai User');
             }
-
-            return redirect()->intended('/landing')->with('success', 'Login berhasil!');
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ])->onlyInput('email');
+        return back()->withErrors(['email' => 'Email atau password salah.']);
+
+        // $credentials = $request->validate([
+        //     'user_email' => ['required', 'email'],
+        //     'password' => ['required'],
+        // ]);
+
+        // if (Auth::attempt($credentials)) {
+        //     $request->session()->regenerate();
+
+        //     $user = Auth::user();
+
+        //     if ($user->role === 'superadmin' || $user->role === 'admin') {
+        //         return redirect()->intended('/dashboardAdmin')->with('success', 'Login berhasil sebagai ' . ucfirst($user->role));
+        //     }
+
+        //     return redirect()->intended('/')->with('success', 'Login berhasil!');
+        // }
+
+        // return back()->withErrors([
+        //     'email' => 'Email atau password salah.',
+        // ])->onlyInput('email');
     }
 
     public function logout(Request $request)
@@ -48,22 +66,4 @@ class LoginController extends Controller
 
         return redirect('/login')->with('success', 'Berhasil logout.');
     }
-
-        // $user = User::where('user_email', $request->email)->first();
-
-        // if ($user && Hash::check($request->password, $user->user_password)) {
-        //     session([
-        //         'user_id' => $user->user_id,
-        //         'user_name' => $user->user_name,
-        //         'role' => $user->role
-        //     ]);
-
-        //     if ($user->role === 'superadmin' || $user->role === 'admin') {
-        //         return redirect('dashboardAdmin')->with('success', 'Login berhasil sebagai ' . ucfirst($user->role));
-        //     } else {
-        //         return redirect('/landing')->with('success', 'Login berhasil sebagai User');
-        //     }
-        // }
-
-        // return back()->withErrors(['email' => 'Email atau password salah.']);
 }

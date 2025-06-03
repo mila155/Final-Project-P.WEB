@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Pengguna;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +20,7 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), [
             'user_name' => 'required|string|max:255',
             'user_telp' => 'required|string|max:20',
-            'user_email' => 'required|string|email|unique:pengguna,user_email',
+            'user_email' => 'required|string|email|unique:users,user_email',
             'user_password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -28,7 +28,7 @@ class RegisterController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $user = Pengguna::create([
+        $user = User::create([
             'user_name' => $request->user_name,
             'user_telp' => $request->user_telp,
             'user_email' => $request->user_email,

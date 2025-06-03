@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $kontak
  * @property Carbon|null $tanggal
  * 
- * @property Pengguna|null $pengguna
+ * @property User|null $user
  * @property Collection|PesananDetail[] $pesanan_details
  *
  * @package App\Models
@@ -43,9 +43,9 @@ class Pesanan extends Model
 		'tanggal'
 	];
 
-	public function pengguna()
+	public function user()
 	{
-		return $this->belongsTo(Pengguna::class, 'id_user');
+		return $this->belongsTo(User::class, 'id_user');
 	}
 
 	public function pesanan_details()

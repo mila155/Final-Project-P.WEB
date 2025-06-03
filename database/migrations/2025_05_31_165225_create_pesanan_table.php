@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pesanan', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('id_user')->nullable()->index('id_user');
-            $table->foreign('id_user')->references('user_id')->on('pengguna');
+            $table->foreign('id_user')->references('user_id')->on('users');
             $table->string('nama', 100)->nullable();
             $table->text('alamat')->nullable();
             $table->string('kontak', 30)->nullable();
