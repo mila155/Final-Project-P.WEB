@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('landing');
@@ -21,3 +23,8 @@ Route::get('/register', [RegisterController::class, 'showRegisForm'])->name('reg
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
 Route::get('/product', [ProdukController::class, 'index'])->name('product');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::get('/cart/delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
