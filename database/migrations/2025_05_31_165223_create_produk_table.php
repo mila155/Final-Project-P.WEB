@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('kuantitas_produk');
             $table->enum('satuan', ['gram', 'ml']);
             $table->text('deskripsi')->nullable();
-            $table->binary('foto')->nullable();
+            $table->string('foto')->nullable();
             $table->integer('stok_akhir')->nullable();
         });
     }
