@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Auth\User;
+// use App\Models\User;
 
 class UserSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)->create();
+        User::factory()->count(10)->create();
         
         User::create([
             'user_name' => "bumi raya",
