@@ -44,7 +44,7 @@
                     <p class="text-green-600 font-bold">Rp {{ number_format($produk->harga_jual, 0, ',', '.') }}</p>
                     <p>Berat: {{ $produk->kuantitas_produk }} {{ $satuan }}</p>
                     <p>Stok: {{ $produk->stok_akhir }} pcs</p>
-                    <a href="{{ url('produk/' . $produk->id) }}" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                    <a href="{{ route('detail', $produk->id) }}" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
                         Lihat Detail
                     </a>
                     </div>

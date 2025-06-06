@@ -7,13 +7,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class PesananDetail
  * 
  * @property int $id
  * @property int $pesanan_id
- * @property int $produk_id
+ * @property int $kode_produk
  * @property int $harga
  * @property int $jumlah
  * 
@@ -24,19 +25,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PesananDetail extends Model
 {
+	use HasFactory;
 	protected $table = 'pesanan_detail';
 	public $timestamps = false;
 
 	protected $casts = [
 		'pesanan_id' => 'int',
-		'produk_id' => 'int',
+		'kode_produk' => 'string',
 		'harga' => 'int',
 		'jumlah' => 'int'
 	];
 
 	protected $fillable = [
 		'pesanan_id',
-		'produk_id',
+		'kode_produk',
 		'harga',
 		'jumlah'
 	];
@@ -48,6 +50,6 @@ class PesananDetail extends Model
 
 	public function produk()
 	{
-		return $this->belongsTo(Produk::class);
+		return $this->belongsTo(Produk::class, 'kode_produk', 'kode_produk');
 	}
 }

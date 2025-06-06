@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Produk
  * 
+ * @property int $id
  * @property string $kode_produk
  * @property string $nama_produk
  * @property int $stok
@@ -33,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
 	protected $table = 'produk';
-	protected $primaryKey = 'kode_produk';
+	// protected $primaryKey = 'kode_produk';
 	public $timestamps = false;
 
 	protected $casts = [

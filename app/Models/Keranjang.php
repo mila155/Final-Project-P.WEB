@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Keranjang
  * 
  * @property int $id
- * @property int $produk_id
+ * @property int $kode_produk
  * @property string $nama
  * @property int $harga
  * @property int|null $jumlah
@@ -28,13 +28,13 @@ class Keranjang extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'produk_id' => 'int',
+		'kode_produk' => 'string',
 		'harga' => 'int',
 		'jumlah' => 'int'
 	];
 
 	protected $fillable = [
-		'produk_id',
+		'kode_produk',
 		'nama',
 		'harga',
 		'jumlah',
@@ -43,6 +43,6 @@ class Keranjang extends Model
 
 	public function produk()
 	{
-		return $this->belongsTo(Produk::class);
+		return $this->belongsTo(Produk::class, 'kode_produk', 'kode_produk');
 	}
 }

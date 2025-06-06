@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('landing');
@@ -28,3 +29,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 Route::get('/cart/delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+Route::get('/product/{id}', [ProdukController::class, 'show'])->name('detail');

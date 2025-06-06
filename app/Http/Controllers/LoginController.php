@@ -27,7 +27,7 @@ class LoginController extends Controller
             ]);
 
             if ($user->role === 'superadmin' || $user->role === 'admin') {
-                return redirect('dashboardAdmin')->with('success', 'Login berhasil sebagai ' . ucfirst($user->role));
+                return redirect('/admin')->with('success', 'Login berhasil sebagai ' . ucfirst($user->role));
             } else {
                 return redirect('/')->with('success', 'Login berhasil sebagai User');
             }

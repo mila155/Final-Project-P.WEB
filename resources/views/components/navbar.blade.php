@@ -1,7 +1,7 @@
         <nav class="top-0 left-0 right-0 bg-navlight dark:bg-navdark z-50 border-gray-200 px-4 lg:px-6 py-2.5 ">
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl font-medium font-ubuntu">
                 <a href="/" class="flex items-center">
-                    <img src="./img/logoajanew.png" class="mr-3 h-6 sm:h-9" alt="Cemal Cemil" />
+                    <img src="./img/logoajanew.png" class="mr-3 h-6 sm:h-9" />
                     <span class="self-center text-xl whitespace-nowrap dark:text-white">Cemal Cemil</span>
                 </a>
                 <div class="flex items-center lg:order-2">

@@ -15,10 +15,9 @@ class UserSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
-        User::factory()->count(10)->create();
-        
+    {       
         User::create([
+            'user_id' => "1",
             'user_name' => "bumi raya",
             'user_email' => "bumiraya@mail.com",
             'user_password' => Hash::make('superadmin123'),
@@ -26,11 +25,14 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10)
         ]);
         User::create([
+            'user_id' => "2",
             'user_name' => "mila",
             'user_email' => "mila@mail.com",
             'user_password' => Hash::make('admin123'),
             'role' => 'admin',
             'remember_token' => Str::random(10)
         ]);
+
+        User::factory()->count(10)->create();
     }
 }

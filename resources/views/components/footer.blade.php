@@ -41,19 +41,19 @@
         </div>
     </footer> --}}
 
-     <!-- Footer -->
+<!-- Footer -->
 <footer class="bg-[#343c44] text-white py-10 mt-auto">
     <div class="container mx-auto grid md:grid-cols-3 gap-10 px-4">
     
     <!-- Brand -->
-    <div>
-      <h4 class="text-xl font-bold mb-2 text-primary">Cemal Cemil</h4>
-      <p class="mb-4">Cemal Cemil - produsen keripik pisang, granola, dan susu pisang</p>
-      <div class="flex gap-4">
-        <a href="#"><i class="fab fa-instagram text-white text-2xl hover:text-primary"></i></a>
-        <a href="#"><i class="fab fa-facebook text-white text-2xl hover:text-primary"></i></a>
-      </div>
-    </div>
+<div>
+  <h4 class="text-xl font-bold mb-2 text-primary">Cemal Cemil</h4>
+  <p class="mb-4">Cemal Cemil - produsen keripik pisang, granola, dan susu pisang</p>
+  <div class="flex gap-4">
+    <a href="#"><i class="fab fa-instagram text-white text-2xl hover:text-primary"></i></a>
+    <a href="#"><i class="fab fa-facebook text-white text-2xl hover:text-primary"></i></a>
+  </div>
+</div>
 
     <!-- Pages -->
     <div>

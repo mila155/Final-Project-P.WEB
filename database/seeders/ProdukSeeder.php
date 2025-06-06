@@ -21,8 +21,8 @@ class ProdukSeeder extends Seeder
 		'harga_produksi' => 10000.00,
 		'kuantitas_produk' => 200,
 		'satuan' => 'gram',
+		'deskripsi' => 'Keripik pisang rasa keju yang gurih dan renyah.',
         'foto' => 'img/keju.png',
-		'deskripsi' => 'Keripik pisang rasa keju yang gurih dan renyah.'
         ]);
 
         Produk::create([
@@ -33,8 +33,8 @@ class ProdukSeeder extends Seeder
 		'harga_produksi' => 10000.00,
 		'kuantitas_produk' => 200,
 		'satuan' => 'gram',
-        'foto' => 'img\coklat.png',
-		'deskripsi' => 'Manis dan renyah, pas buat pencinta coklat!'
+		'deskripsi' => 'Manis dan renyah, pas buat pencinta coklat!',
+        'foto' => 'img/coklat.png',
         ]);
 
         Produk::create([
@@ -45,11 +45,11 @@ class ProdukSeeder extends Seeder
 		'harga_produksi' => 10000.00,
 		'kuantitas_produk' => 200,
 		'satuan' => 'gram',
-        'foto' => 'img\ori.png',
-		'deskripsi' => 'Rasa asli pisang tanpa tambahan rasa.'
+		'deskripsi' => 'Rasa asli pisang tanpa tambahan rasa.',
+        'foto' => 'img/ori.png',
         ]);
 
-        Produk::create([
+        $produk = Produk::create([
         'kode_produk' => 'PCC004',
 		'nama_produk' => 'Granola Cinnamon',
 		'stok' => 24,
@@ -57,8 +57,8 @@ class ProdukSeeder extends Seeder
 		'harga_produksi' => 16000.00,
 		'kuantitas_produk' => 200,
 		'satuan' => 'gram',
-        'foto' => 'img\gran.cin.png',
-		'deskripsi' => 'Rasa hangat dan khas dari kayu manis langsung terasa sejak suapan pertama.'
+		'deskripsi' => 'Rasa hangat dan khas dari kayu manis langsung terasa sejak suapan pertama.',
+        'foto' => 'img/gran.cin.png',
         ]);
 
         Produk::create([
@@ -69,8 +69,8 @@ class ProdukSeeder extends Seeder
 		'harga_produksi' => 14000.00,
 		'kuantitas_produk' => 200,
 		'satuan' => 'gram',
-        'foto' => 'img\gran.coklat.png',
-		'deskripsi' => 'Setiap suapan granola coklat menghadirkan perpaduan rasa yang kaya dan memanjakan lidah.'
+		'deskripsi' => 'Setiap suapan granola coklat menghadirkan perpaduan rasa yang kaya dan memanjakan lidah.',
+        'foto' => 'img/gran.coklat.png',
         ]);
 
         Produk::create([
@@ -81,8 +81,8 @@ class ProdukSeeder extends Seeder
 		'harga_produksi' => 15000.00,
 		'kuantitas_produk' => 200,
 		'satuan' => 'gram',
-        'foto' => 'img\gran.madu.png',
-		'deskripsi' => 'Renyahnya oat dan kacang-kacangan berpadu sempurna dengan karamel alami dari madu yang dipanggang hingga keemasan.'
+		'deskripsi' => 'Renyahnya oat dan kacang-kacangan berpadu sempurna dengan karamel alami dari madu yang dipanggang hingga keemasan.',
+        'foto' => 'img/gran.madu.png',
         ]);
 
         Produk::create([
@@ -93,8 +93,8 @@ class ProdukSeeder extends Seeder
 		'harga_produksi' => 8000.00,
 		'kuantitas_produk' => 350,
 		'satuan' => 'ml',
-        'foto' => 'img\susu.beri.png',
-		'deskripsi' => 'Perpaduan manisnya pisang dan segarnya stroberi dalam satu botol!'
+		'deskripsi' => 'Perpaduan manisnya pisang dan segarnya stroberi dalam satu botol!',
+        'foto' => 'img/susu.beri.png',
         ]);
 
         Produk::create([
@@ -105,8 +105,8 @@ class ProdukSeeder extends Seeder
 		'harga_produksi' => 8000.00,
 		'kuantitas_produk' => 350,
 		'satuan' => 'ml',
-        'foto' => 'img\susu.coklat.png',
-		'deskripsi' => 'Manis lembut pisang berpadu dengan rich-nya coklat menciptakan rasa yang creamy, legit, dan bikin nagih.'
+		'deskripsi' => 'Manis lembut pisang berpadu dengan rich-nya coklat menciptakan rasa yang creamy, legit, dan bikin nagih.',
+        'foto' => 'img/susu.coklat.png',
         ]);
 
         Produk::create([
@@ -117,8 +117,9 @@ class ProdukSeeder extends Seeder
 		'harga_produksi' => 8000.00,
 		'kuantitas_produk' => 350,
 		'satuan' => 'ml',
-        'foto' => 'img\susu.ori.png',
-		'deskripsi' => 'Rasa klasik pisang yang natural, ringan, dan lembut di lidah tanpa tambahan rasa lain.'
+		'deskripsi' => 'Rasa klasik pisang yang natural, ringan, dan lembut di lidah tanpa tambahan rasa lain.',
+        'foto' => 'img/susu.ori.png',
         ]);
+		// dd($produk);
     }
 }

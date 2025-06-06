@@ -25,23 +25,23 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'produk_id' => 'required|exists:produks,id',
+            'kode_produk' => 'required|exists:produk,kode_produk',
             'nama' => 'required|string',
             'harga' => 'required|numeric',
             'jumlah' => 'required|integer|min:1',
         ]);
 
-        $keranjang = Keranjang::where('produk_id', $validated['produk_id'])->first();
+        $keranjang = Keranjang::where('kode_produk', $validated['kode_produk'])->first();
 
         if ($keranjang) {
             // Jika produk sudah ada di keranjang, update jumlahnya
             $keranjang->increment('jumlah', $validated['jumlah']);
         } else {
             // Ambil data produk untuk foto
-            $produk = Produk::find($validated['produk_id']);
+            $produk = Produk::find($validated['kode_produk']);
 
             Keranjang::create([
-                'produk_id' => $validated['produk_id'],
+                'kode_produk' => $validated['kode_produk'],
                 'nama' => $validated['nama'],
                 'harga' => $validated['harga'],
                 'jumlah' => $validated['jumlah'],
