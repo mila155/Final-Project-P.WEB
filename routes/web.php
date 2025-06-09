@@ -9,11 +9,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
-    return view('landing');
+    return view('landing', ['title' => 'Home Page']);
 });
 
 Route::get('/cart', function () {
-    return view('cart');
+    return view('cart',['title' => 'Cart Page']);
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('login');
+        return view('login', ['title' => 'Login Page']);
     }
 
     public function login(Request $request)
@@ -20,11 +20,14 @@ class LoginController extends Controller
         $user = User::where('user_email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->user_password)) {
-            session([
-                'user_id' => $user->user_id,
-                'user_name' => $user->user_name,
-                'role' => $user->role
-            ]);
+            // session([
+            //     'user_id' => $user->user_id,
+            //     'user_name' => $user->user_name,
+            //     'role' => $user->role
+            // ]);
+
+            Auth::login($user); // <-- ini kunci utamanya
+            $request->session()->regenerate(); // untuk keamanan
 
             if ($user->role === 'superadmin' || $user->role === 'admin') {
                 return redirect('/admin')->with('success', 'Login berhasil sebagai ' . ucfirst($user->role));
@@ -33,7 +36,7 @@ class LoginController extends Controller
             }
         }
 
-        return back()->withErrors(['email' => 'Email atau password salah.']);
+        return back()->withErrors(['email' => 'Email atau password salah.'])->withInput();
 
         // $credentials = $request->validate([
         //     'user_email' => ['required', 'email'],

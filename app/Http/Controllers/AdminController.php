@@ -17,14 +17,12 @@ class AdminController extends Controller
             ->select(DB::raw('SUM(harga * jumlah) as total'))
             ->value('total');
 
-        // Line chart: pesanan 7 hari terakhir
         $lineData = DB::table('pesanan')
             ->selectRaw('DATE(tanggal) as tanggal, COUNT(*) as jumlah')
             ->where('tanggal', '>=', now()->subDays(7))
             ->groupBy(DB::raw('DATE(tanggal)'))
             ->get();
 
-        // Bar chart: pendapatan per minggu dalam sebulan terakhir
         $barData = DB::table('pesanan')
             ->join('pesanan_detail', 'pesanan.id', '=', 'pesanan_detail.pesanan_id')
             ->selectRaw('WEEK(tanggal) as minggu, SUM(harga * jumlah) as total')
@@ -32,7 +30,6 @@ class AdminController extends Controller
             ->groupBy(DB::raw('WEEK(tanggal)'))
             ->get();
 
-        // Omzet per bulan
         $omzetData = DB::table('pesanan as p')
             ->join('pesanan_detail as pd', 'p.id', '=', 'pd.pesanan_id')
             ->selectRaw("DATE_FORMAT(p.tanggal, '%Y-%m') AS bulan, SUM(pd.harga * pd.jumlah) AS total_omzet")
@@ -40,7 +37,6 @@ class AdminController extends Controller
             ->orderBy('bulan')
             ->get();
 
-        // Produk terlaris
         $produkData = DB::table('pesanan_detail')
             ->join('produk', 'pesanan_detail.kode_produk', '=', 'produk.kode_produk')
             ->select('produk.nama_produk', DB::raw('SUM(jumlah) as total_terjual'))
@@ -57,6 +53,6 @@ class AdminController extends Controller
             'barData' => $barData,
             'omzetData' => $omzetData,
             'produkData' => $produkData,
-        ]);
+        ], ['title' => 'Admin Page']);
     }
 }

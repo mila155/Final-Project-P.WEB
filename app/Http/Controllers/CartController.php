@@ -19,7 +19,7 @@ class CartController extends Controller
         });
 
         // Kirim $items dan $grandTotal ke view
-        return view('cart', compact('items', 'grandTotal'));
+        return view('cart', compact('items', 'grandTotal'), ['title' => 'Cart Page']);
     }
 
     public function store(Request $request)

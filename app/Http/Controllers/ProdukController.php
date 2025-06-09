@@ -11,12 +11,12 @@ class ProdukController extends Controller
     {
         $produkList = Produk::all();
 
-        return view('product', compact('produkList'));
+        return view('product', compact('produkList'), ['title' => 'Product Page']);
     }
 
     public function show($id)
     {
         $produk = Produk::findOrFail($id);
-        return view('detail', compact('produk'));
+        return view('detail', compact('produk'), ['title' => 'Product Page']);
     }
 }
