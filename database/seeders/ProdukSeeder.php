@@ -23,6 +23,7 @@ class ProdukSeeder extends Seeder
 		'satuan' => 'gram',
 		'deskripsi' => 'Keripik pisang rasa keju yang gurih dan renyah.',
         'foto' => 'img/keju.png',
+		'stok_akhir' => 24,
         ]);
 
         Produk::create([
@@ -35,6 +36,7 @@ class ProdukSeeder extends Seeder
 		'satuan' => 'gram',
 		'deskripsi' => 'Manis dan renyah, pas buat pencinta coklat!',
         'foto' => 'img/coklat.png',
+		'stok_akhir' => 24,
         ]);
 
         Produk::create([
@@ -47,6 +49,7 @@ class ProdukSeeder extends Seeder
 		'satuan' => 'gram',
 		'deskripsi' => 'Rasa asli pisang tanpa tambahan rasa.',
         'foto' => 'img/ori.png',
+		'stok_akhir' => 24,
         ]);
 
         $produk = Produk::create([
@@ -59,6 +62,7 @@ class ProdukSeeder extends Seeder
 		'satuan' => 'gram',
 		'deskripsi' => 'Rasa hangat dan khas dari kayu manis langsung terasa sejak suapan pertama.',
         'foto' => 'img/gran.cin.png',
+		'stok_akhir' => 24,
         ]);
 
         Produk::create([
@@ -71,6 +75,7 @@ class ProdukSeeder extends Seeder
 		'satuan' => 'gram',
 		'deskripsi' => 'Setiap suapan granola coklat menghadirkan perpaduan rasa yang kaya dan memanjakan lidah.',
         'foto' => 'img/gran.coklat.png',
+		'stok_akhir' => 24,
         ]);
 
         Produk::create([
@@ -83,6 +88,7 @@ class ProdukSeeder extends Seeder
 		'satuan' => 'gram',
 		'deskripsi' => 'Renyahnya oat dan kacang-kacangan berpadu sempurna dengan karamel alami dari madu yang dipanggang hingga keemasan.',
         'foto' => 'img/gran.madu.png',
+		'stok_akhir' => 24,
         ]);
 
         Produk::create([
@@ -95,6 +101,7 @@ class ProdukSeeder extends Seeder
 		'satuan' => 'ml',
 		'deskripsi' => 'Perpaduan manisnya pisang dan segarnya stroberi dalam satu botol!',
         'foto' => 'img/susu.beri.png',
+		'stok_akhir' => 24,
         ]);
 
         Produk::create([
@@ -107,6 +114,7 @@ class ProdukSeeder extends Seeder
 		'satuan' => 'ml',
 		'deskripsi' => 'Manis lembut pisang berpadu dengan rich-nya coklat menciptakan rasa yang creamy, legit, dan bikin nagih.',
         'foto' => 'img/susu.coklat.png',
+		'stok_akhir' => 24,
         ]);
 
         Produk::create([
@@ -119,6 +127,7 @@ class ProdukSeeder extends Seeder
 		'satuan' => 'ml',
 		'deskripsi' => 'Rasa klasik pisang yang natural, ringan, dan lembut di lidah tanpa tambahan rasa lain.',
         'foto' => 'img/susu.ori.png',
+		'stok_akhir' => 24,
         ]);
 		// dd($produk);
     }

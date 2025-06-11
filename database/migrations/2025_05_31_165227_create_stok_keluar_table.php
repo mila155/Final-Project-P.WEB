@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('stok_keluar', function (Blueprint $table) {
             $table->increments('id_keluar');
+            $table->unsignedInteger('pesanan_id')->index('pesanan_id');
+            $table->foreign('pesanan_id')->references('id')->on('pesanan');
             // $table->string('kode_produk', 6)->index('kode_produk');
             $table->string('kode_produk', 6);
             $table->foreign('kode_produk')->references('kode_produk')->on('produk');

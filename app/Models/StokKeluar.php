@@ -29,13 +29,15 @@ class StokKeluar extends Model
 
 	protected $casts = [
 		'tanggal_keluar' => 'datetime',
-		'jumlah_keluar' => 'int'
+		'jumlah_keluar' => 'int',
+		'pesanan_id' => 'int'
 	];
 
 	protected $fillable = [
 		'kode_produk',
 		'tanggal_keluar',
-		'jumlah_keluar'
+		'jumlah_keluar',
+		'pesanan_id'
 	];
 
 	public function produk()

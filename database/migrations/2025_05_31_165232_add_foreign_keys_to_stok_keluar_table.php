@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::table('stok_keluar', function (Blueprint $table) {
             $table->foreign(['kode_produk'], 'stok_keluar_ibfk_1')->references(['kode_produk'])->on('produk')->onUpdate('no action')->onDelete('no action');
+
+            $table->foreign(['pesanan_id'], 'stok_keluar_ibfk_2')->references(['id'])->on('pesanan')->onUpdate('no action')->onDelete('no action');
         });
     }
 
@@ -23,6 +25,7 @@ return new class extends Migration
     {
         Schema::table('stok_keluar', function (Blueprint $table) {
             $table->dropForeign('stok_keluar_ibfk_1');
+            $table->dropForeign('stok_keluar_ibfk_2');
         });
     }
 };

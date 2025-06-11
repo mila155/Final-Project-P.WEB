@@ -48,7 +48,7 @@
                     <x-nav-link href="/product" :active="request()->is('product')">Our Product</x-nav-link>
                 </li>
                 <li>
-                    <x-nav-link href="/#" :active="request()->is('/#')">About Us</x-nav-link>
+                    <x-nav-link href="/about" :active="request()->is('about')">About Us</x-nav-link>
                 </li>
                 <li>
                     <x-nav-link href="/cart" :active="request()->is('cart')">Cart</x-nav-link>

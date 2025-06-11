@@ -12,6 +12,10 @@ Route::get('/', function () {
     return view('landing', ['title' => 'Home Page']);
 });
 
+Route::get('/about', function () {
+    return view('landing', ['title' => 'About Page']);
+});
+
 Route::get('/cart', function () {
     return view('cart',['title' => 'Cart Page']);
 });
@@ -27,9 +31,12 @@ Route::get('/product', [ProdukController::class, 'index'])->name('product');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
-Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
-Route::get('/cart/delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
 Route::get('/product/{id}', [ProdukController::class, 'show'])->name('detail');
+
+Route::get('/checkout', [CheckoutController::class, 'showForm'])->name('checkout.form');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');

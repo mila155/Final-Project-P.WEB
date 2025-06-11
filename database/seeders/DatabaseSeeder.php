@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(PesananSeeder::class);
         $this->call(PesananDetailSeeder::class);
+        $this->call(CartSeeder::class);
+        $this->call(StokkelSeeder::class);
     }
 }

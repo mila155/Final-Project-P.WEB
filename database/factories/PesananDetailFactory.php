@@ -30,9 +30,9 @@ class PesananDetailFactory extends Factory
             // 'pesanan_id' => Pesanan::factory(), // ini otomatis buat 1 pesanan dulu
             // 'kode_produk' => $produk->kode_produk,
             // 'harga' => $produk->harga_jual, // pakai harga dari produk
-            'kode_produk' => $produk ? $produk->kode_produk : 'PCC001', 
-            'harga' => $produk ? $produk->harga_jual : 16500,
-            'jumlah' => fake()->numberBetween(1, 10),
+            'kode_produk' => $produk->kode_produk, 
+            'harga' => $produk->harga_jual,
+            'jumlah' => fake()->numberBetween(1, 5),
         ];
     }
 }

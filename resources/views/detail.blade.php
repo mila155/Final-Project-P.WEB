@@ -22,7 +22,7 @@
 
                 <form action="{{ route('cart.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="kode_produk" value="{{ $produk->id }}">
+                    <input type="hidden" name="kode_produk" value="{{ $produk->kode_produk }}">
                     <input type="hidden" name="nama" value="{{ $produk->nama_produk }}">
                     <input type="hidden" name="harga" value="{{ $produk->harga_jual }}">
                     <div class="mb-3">
