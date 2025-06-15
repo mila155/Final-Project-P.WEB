@@ -2,7 +2,7 @@
     <x-adminnav></x-adminnav>
     <x-slot:title>{{ $title }}</x-slot:title>
 
-    <div class="bg-green-700 sticky top-0 shadow-md z-[1030]">
+    <div class="bg-green-700 top-0 shadow-md z-[1030]">
         <nav class="container mx-auto flex items-center justify-center p-4">
             <a href="{{ route('admin') }}" class="bg-green-600 mr-4 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Kembali</a>
             <a href="{{ route('stok.create') }}" class="bg-green-600 mr-4 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Tambah Stok</a>
@@ -53,12 +53,12 @@
                             <td class="border px-4 py-2">{{ $index + 1 }}</td>
                             <td class="border px-4 py-2">{{ htmlspecialchars($data->kode_produk) }}</td>
                             <td class="border px-4 py-2">{{ htmlspecialchars($data->nama_produk) }}</td>
-                            {{-- <td class="border px-4 py-2">{{ $data->stok_awal_db }}</td> --}}
-                            <td class="border px-4 py-2">{{ $data->stok_awal }}</td>
+                            <td class="border px-4 py-2">{{ $data->stok_awal_db }}</td>
+                            {{-- <td class="border px-4 py-2">{{ $data->stok_awal }}</td> --}}
                             <td class="border px-4 py-2">{{ $data->total_masuk }}</td>
                             <td class="border px-4 py-2">{{ $data->total_keluar }}</td>
-                            {{-- <td class="border px-4 py-2">{{ $data->stok_akhir }}</td> --}}
-                            <td class="border px-4 py-2">{{ $data->stok }}</td>
+                            <td class="border px-4 py-2">{{ $data->stok_akhir }}</td>
+                            {{-- <td class="border px-4 py-2">{{ $data->stok }}</td> --}}
                             <td class="border px-4 py-2">{{ $data->tanggal_terakhir_masuk ?? '-' }}</td>
                         </tr>
                     @endforeach

@@ -26,8 +26,8 @@
                         {{-- <p>
                             Berat: {{ $produk->kuantitas_produk }} {{ $satuan }}
                         </p> --}}
-                        {{-- @if ($produk->stok_akhir<6)                             --}}
-                        @if ($produk->stok<6)                            
+                        @if ($produk->stok_akhir<6)                            
+                        {{-- @if ($produk->stok<6)                             --}}
                             <p class="text-red-700">
                                 {{-- Stok: {{ $produk->stok_akhir }} pcs --}}
                                 Stok tersisa sedikit!
@@ -51,8 +51,8 @@
                             <input type="hidden" name="kode_produk" value="{{ $produk->kode_produk }}">
                             <input type="hidden" name="nama" value="{{ $produk->nama_produk }}">
                             <input type="hidden" name="harga" value="{{ $produk->harga_jual }}">
-                            {{-- @if ($produk->stok_akhir) --}}
-                            @if ($produk->stok)
+                            @if ($produk->stok_akhir)
+                            {{-- @if ($produk->stok) --}}
                                 <input type="hidden" name="jumlah" value=1>                               
                             @else
                             @endif

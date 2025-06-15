@@ -19,8 +19,8 @@
                 @endphp
 
                 <p class="mb-1">Berat: {{ $produk->kuantitas_produk }} {{ $satuan }}</p>
-                <p class="mb-3">Stok: {{ $produk->stok }} tersedia</p>
-                {{-- <p class="mb-3">Stok: {{ $produk->stok_akhir }} tersedia</p> --}}
+                {{-- <p class="mb-3">Stok: {{ $produk->stok }} tersedia</p> --}}
+                <p class="mb-3">Stok: {{ $produk->stok_akhir }} tersedia</p>
 
                 @if (session('error'))
                     <div class="bg-red-100 text-red-700 p-2 rounded mb-4">
@@ -41,8 +41,8 @@
                     <input type="hidden" name="harga" value="{{ $produk->harga_jual }}">
                     <div class="mb-3">
                         <label for="jumlah" class="form-label">Jumlah:</label>
-                        <input type="number" name="jumlah" id="jumlah" class="border rounded p-2" value="1" min="1" max="{{ $produk->stok }}">
-                        {{-- <input type="number" name="jumlah" id="jumlah" class="border rounded p-2" value="1" min="1" max="{{ $produk->stok_akhir }}"> --}}
+                        {{-- <input type="number" name="jumlah" id="jumlah" class="border rounded p-2" value="1" min="1" max="{{ $produk->stok }}"> --}}
+                        <input type="number" name="jumlah" id="jumlah" class="border rounded p-2" value="1" min="1" max="{{ $produk->stok_akhir }}">
                         @error('jumlah')
                             <p class="text-red-500 text-sm">{{ $message }}</p>
                         @enderror

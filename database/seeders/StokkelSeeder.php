@@ -27,8 +27,8 @@ class StokkelSeeder extends Seeder
             $produk = Produk::where('kode_produk', $detail->kode_produk)->first();
 
             if ($produk) {
-                // $produk->stok_akhir -= $detail->jumlah;
-                $produk->stok -= $detail->jumlah;
+                $produk->stok_akhir -= $detail->jumlah;
+                // $produk->stok -= $detail->jumlah;
                 $produk->save();
             }
         });

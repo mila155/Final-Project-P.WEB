@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('satuan', ['gram', 'ml']);
             $table->text('deskripsi')->nullable();
             $table->string('foto')->nullable();
-            // $table->integer('stok_akhir')->nullable();
+            $table->integer('stok_akhir')->nullable();
         });
     }
 

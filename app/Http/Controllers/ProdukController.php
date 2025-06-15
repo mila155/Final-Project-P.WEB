@@ -64,6 +64,7 @@ class ProdukController extends Controller
 
         $validated = $request->validate([
             'nama_produk' => 'required|string|max:255',
+            'stok_akhir' => 'required|integer|min:0',
             'kuantitas_produk' => 'required|integer|min:0',
             'satuan' => 'required|string|in:gram,ml',
             'harga_jual' => 'required|numeric|min:0',

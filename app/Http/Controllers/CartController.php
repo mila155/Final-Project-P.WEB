@@ -109,8 +109,7 @@ class CartController extends Controller
         ]);
         $keranjang = Keranjang::findOrFail($id);
         $produk = Produk::where('kode_produk', $keranjang->kode_produk)->first();
-        // if(($validated['jumlah']) <= $produk->stok_akhir){
-        if(($validated['jumlah']) <= $produk->stok){
+        if(($validated['jumlah']) <= $produk->stok_akhir){
                 $keranjang->update(['jumlah' => $validated['jumlah']]);
         } else {
             return redirect()->back()->with('error', 'Jumlah melebihi stok yang tersedia.');                    

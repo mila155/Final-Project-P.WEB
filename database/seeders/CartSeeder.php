@@ -21,10 +21,10 @@ class CartSeeder extends Seeder
             $jumlahProduk = rand(1, $produkList->count());
             $produkAcak = $produkList->random($jumlahProduk);
             foreach ($produkAcak as $produk) {
-                // if ($produk->stok_akhir > 0) {
-                if ($produk->stok > 0) {
-                    // $jumlah = fake()->numberBetween(1, min($produk->stok_akhir, 5));
-                    $jumlah = fake()->numberBetween(1, min($produk->stok, 5));
+                if ($produk->stok_akhir > 0) {
+                // if ($produk->stok > 0) {
+                    $jumlah = fake()->numberBetween(1, min($produk->stok_akhir, 5));
+                    // $jumlah = fake()->numberBetween(1, min($produk->stok, 5));
 
                     Keranjang::firstOrCreate(
                         [

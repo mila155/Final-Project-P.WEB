@@ -2,7 +2,7 @@
     <x-adminnav></x-adminnav>
     <x-slot:title>{{ $title }}</x-slot:title> 
 
-    <div class="bg-green-700 sticky top-0 shadow-md z-[1030]">
+    <div class="bg-green-700 top-0 shadow-md z-[1030]">
         <nav class="container mx-auto flex items-center justify-center p-4">
             <a href="{{ route('admin') }}" class="bg-green-600 mr-4 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Kembali</a>
             <a href="{{ route('stok.create') }}" class="bg-green-600 mr-4 hover:bg-green-800 text-white hover:text-yellow-400 px-4 py-2 rounded-md transition">Tambah Stok</a>
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <label class="block font-semibold">Jumlah Masuk</label>
-                <input type="number" name="jumlah_masuk" required class="w-full border rounded px-3 py-2" min="1"/>
+                <input type="number" name="jumlah_masuk" required class="w-full border rounded px-3 py-2" min="1" value="{{ old('jumlah_masuk') }}"/>
                 @error('jumlah_masuk')
                     <span class="text-red-600 text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div>
-                <button type="submit" onclick="this.disabled=true; this.form.submit();" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Simpan</button>
-                {{-- <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Simpan</button> --}}
+                {{-- <button type="submit" onclick="this.disabled=true; this.form.submit();" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Simpan</button> --}}
+                <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Simpan</button>
             </div>
         </form>
     </div>
