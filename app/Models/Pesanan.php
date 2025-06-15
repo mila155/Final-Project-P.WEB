@@ -54,4 +54,16 @@ class Pesanan extends Model
 	{
 		return $this->hasMany(PesananDetail::class);
 	}
+
+	public function scopeByMonth($query, $month, $year)
+	{
+		return $query->whereMonth('tanggal', $month)
+					->whereYear('tanggal', $year);
+	}
+
+	// Method untuk menghitung total harga pesanan
+	public function getTotalHargaAttribute()
+	{
+		return $this->pesanan_details()->sum(\DB::raw('harga * jumlah'));
+	}
 }

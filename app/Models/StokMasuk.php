@@ -42,4 +42,10 @@ class StokMasuk extends Model
 	{
 		return $this->belongsTo(Produk::class, 'kode_produk', 'kode_produk');
 	}
+
+	public function scopeByMonth($query, $month, $year)
+	{
+		return $query->whereMonth('tanggal_masuk', $month)
+					->whereYear('tanggal_masuk', $year);
+	}
 }

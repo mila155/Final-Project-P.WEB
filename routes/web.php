@@ -8,6 +8,8 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StokController;
+use App\Http\Controllers\KeuanganController;
+
 
 Route::get('/', function () {
     return view('landing', ['title' => 'Home Page']);
@@ -63,3 +65,10 @@ Route::delete('/cart/delete/{id}', [CartController::class, 'destroy'])->name('ca
 
 Route::get('/checkout', [CheckoutController::class, 'showForm'])->name('checkout.form');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/keuangan', [KeuanganController::class, 'index'])->name('admin.keuangan.index');
+    Route::get('/keuangan/export/pdf', [KeuanganController::class, 'exportPdf'])->name('admin.keuangan.export.pdf');
+    Route::get('/keuangan/export/excel', [KeuanganController::class, 'exportExcel'])->name('admin.keuangan.export.excel');
+});
