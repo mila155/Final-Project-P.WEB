@@ -65,29 +65,76 @@ class StokController extends Controller
         return redirect()->route('stok.history')->with('success', 'Stok masuk berhasil ditambahkan.');
     }
 
-    public function report(Request $request)
+        public function report(Request $request)
+        {
+            $tanggal_awal = $request->query('tanggal_awal', now()->subDays(30)->toDateString());
+            $tanggal_akhir = $request->query('tanggal_akhir', now()->toDateString());
+
+            $stokMasukSub = DB::table('stok_masuk')
+                ->select('kode_produk', DB::raw('SUM(jumlah_masuk) as total_masuk'), DB::raw('MAX(tanggal_masuk) as tanggal_terakhir_masuk'))
+                ->whereBetween('tanggal_masuk', [$tanggal_awal, $tanggal_akhir])
+                ->groupBy('kode_produk');
+
+            $stokKeluarSub = DB::table('stok_keluar')
+                ->select('kode_produk', DB::raw('SUM(jumlah_keluar) as total_keluar'))
+                ->whereBetween('tanggal_keluar', [$tanggal_awal, $tanggal_akhir])
+                ->groupBy('kode_produk');
+
+            $query = Produk::select(
+                'produk.kode_produk',
+                'produk.nama_produk',
+                'produk.stok as stok_awal_db',
+                DB::raw('COALESCE(sm.total_masuk, 0) as total_masuk'),
+                DB::raw('COALESCE(sk.total_keluar, 0) as total_keluar'),
+                DB::raw('COALESCE(sm.tanggal_terakhir_masuk, NULL) as tanggal_terakhir_masuk')            
+            )
+                ->leftJoinSub($stokMasukSub, 'sm', function ($join) {
+                    $join->on('produk.kode_produk', '=', 'sm.kode_produk');
+                })
+                ->leftJoinSub($stokKeluarSub, 'sk', function ($join) {
+                    $join->on('produk.kode_produk', '=', 'sk.kode_produk');
+                })
+                ->havingRaw('total_masuk > 0 OR total_keluar > 0');
+
+            $stokReports = $query->get()->map(function ($item) {
+                $item->stok_akhir = $item->stok_awal_db - $item->total_keluar + $item->total_masuk ;
+                Produk::where('kode_produk', $item->kode_produk)->update(['stok_akhir' => $item->stok_akhir]);
+                return $item;
+            });
+            
+            return view('admin.stok.report', compact('stokReports', 'tanggal_awal', 'tanggal_akhir'), ['title' => 'Laporan Manajemen Stok']);
+        }
+
+        public function exportPdf(Request $request)
     {
-        $tanggal_awal = $request->query('tanggal_awal', now()->subDays(30)->toDateString());
-        $tanggal_akhir = $request->query('tanggal_akhir', now()->toDateString());
+        // Validasi input
+        $request->validate([
+            'tanggal_awal' => 'required|date',
+            'tanggal_akhir' => 'required|date|after_or_equal:tanggal_awal',
+        ]);
 
-        $stokMasukSub = DB::table('stok_masuk')
-            ->select('kode_produk', DB::raw('SUM(jumlah_masuk) as total_masuk'), DB::raw('MAX(tanggal_masuk) as tanggal_terakhir_masuk'))
-            ->whereBetween('tanggal_masuk', [$tanggal_awal, $tanggal_akhir])
-            ->groupBy('kode_produk');
+        $tanggal_awal = $request->input('tanggal_awal');
+        $tanggal_akhir = $request->input('tanggal_akhir');
 
-        $stokKeluarSub = DB::table('stok_keluar')
-            ->select('kode_produk', DB::raw('SUM(jumlah_keluar) as total_keluar'))
-            ->whereBetween('tanggal_keluar', [$tanggal_awal, $tanggal_akhir])
-            ->groupBy('kode_produk');
+        try {
+            $stokMasukSub = DB::table('stok_masuk')
+                ->select('kode_produk', DB::raw('SUM(jumlah_masuk) as total_masuk'), DB::raw('MAX(tanggal_masuk) as tanggal_terakhir_masuk'))
+                ->whereBetween('tanggal_masuk', [$tanggal_awal, $tanggal_akhir])
+                ->groupBy('kode_produk');
 
-        $query = Produk::select(
-            'produk.kode_produk',
-            'produk.nama_produk',
-            'produk.stok as stok_awal_db',
-            DB::raw('COALESCE(sm.total_masuk, 0) as total_masuk'),
-            DB::raw('COALESCE(sk.total_keluar, 0) as total_keluar'),
-            DB::raw('COALESCE(sm.tanggal_terakhir_masuk, NULL) as tanggal_terakhir_masuk')            
-        )
+            $stokKeluarSub = DB::table('stok_keluar')
+                ->select('kode_produk', DB::raw('SUM(jumlah_keluar) as total_keluar'))
+                ->whereBetween('tanggal_keluar', [$tanggal_awal, $tanggal_akhir])
+                ->groupBy('kode_produk');
+
+            $query = Produk::select(
+                'produk.kode_produk',
+                'produk.nama_produk',
+                'produk.stok as stok_awal_db',
+                DB::raw('COALESCE(sm.total_masuk, 0) as total_masuk'),
+                DB::raw('COALESCE(sk.total_keluar, 0) as total_keluar'),
+                DB::raw('COALESCE(sm.tanggal_terakhir_masuk, NULL) as tanggal_terakhir_masuk')
+            )
             ->leftJoinSub($stokMasukSub, 'sm', function ($join) {
                 $join->on('produk.kode_produk', '=', 'sm.kode_produk');
             })
@@ -96,52 +143,20 @@ class StokController extends Controller
             })
             ->havingRaw('total_masuk > 0 OR total_keluar > 0');
 
-        $stokReports = $query->get()->map(function ($item) {
-            $item->stok_akhir = $item->stok_awal_db - $item->total_keluar + $item->total_masuk ;
-            Produk::where('kode_produk', $item->kode_produk)->update(['stok_akhir' => $item->stok_akhir]);
-            return $item;
-        });
-        
-        return view('admin.stok.report', compact('stokReports', 'tanggal_awal', 'tanggal_akhir'), ['title' => 'Laporan Manajemen Stok']);
-    }
+            $stokReports = $query->get()->map(function ($item) {
+                $item->stok_akhir = $item->stok_awal_db + $item->total_masuk - $item->total_keluar;
+                return $item;
+            });
 
-    public function exportPdf(Request $request)
-    {
-        $tanggal_awal = $request->input('tanggal_awal');
-        $tanggal_akhir = $request->input('tanggal_akhir');
+            // Generate PDF
+            $pdf = Pdf::loadView('admin.stok.pdf', compact('stokReports', 'tanggal_awal', 'tanggal_akhir'));
+            
+            $filename = 'laporan_stok_' . $tanggal_awal . '_to_' . $tanggal_akhir . '.pdf';
+            
+            return $pdf->download($filename);
 
-        $stokMasukSub = DB::table('stok_masuk')
-            ->select('kode_produk', DB::raw('SUM(jumlah_masuk) as total_masuk'), DB::raw('MAX(tanggal_masuk) as tanggal_terakhir_masuk'))
-            ->whereBetween('tanggal_masuk', [$tanggal_awal, $tanggal_akhir])
-            ->groupBy('kode_produk');
-
-        $stokKeluarSub = DB::table('stok_keluar')
-            ->select('kode_produk', DB::raw('SUM(jumlah_keluar) as total_keluar'))
-            ->whereBetween('tanggal_keluar', [$tanggal_awal, $tanggal_akhir])
-            ->groupBy('kode_produk');
-
-        $query = Produk::select(
-            'produk.kode_produk',
-            'produk.nama_produk',
-            'produk.stok as stok_awal_db',
-            DB::raw('COALESCE(sm.total_masuk, 0) as total_masuk'),
-            DB::raw('COALESCE(sk.total_keluar, 0) as total_keluar'),
-            DB::raw('COALESCE(sm.tanggal_terakhir_masuk, NULL) as tanggal_terakhir_masuk')
-        )
-        ->leftJoinSub($stokMasukSub, 'sm', function ($join) {
-            $join->on('produk.kode_produk', '=', 'sm.kode_produk');
-        })
-        ->leftJoinSub($stokKeluarSub, 'sk', function ($join) {
-            $join->on('produk.kode_produk', '=', 'sk.kode_produk');
-        })
-        ->havingRaw('total_masuk > 0 OR total_keluar > 0');
-
-        $stokReports = $query->get()->map(function ($item) {
-            $item->stok_akhir = $item->stok_awal_db + $item->total_masuk - $item->total_keluar;
-            return $item;
-        });
-
-        $pdf = Pdf::loadView('admin.stok.pdf', compact('stokReports', 'tanggal_awal', 'tanggal_akhir'));
-        return $pdf->download('laporan_stok.pdf');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal mengexport PDF: ' . $e->getMessage());
+        }
     }
 }
