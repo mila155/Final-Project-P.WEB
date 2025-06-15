@@ -66,4 +66,8 @@ class User extends Authenticatable
 	{
 		return $this->hasMany(Keranjang::class, 'user_id');
 	}
+	public function getAuthPassword()
+    {
+        return $this->user_password;
+    }
 }

@@ -1,4 +1,5 @@
 <x-layout>
+    <x-navbar></x-navbar>
     <x-slot:title>{{ $title }}</x-slot:title>
     <div class="max-w-5xl mx-auto px-4 py-10">
         <div class="bg-yellow-300 text-black p-6 rounded-lg text-center mb-8">
@@ -24,7 +25,7 @@
             </div> --}}
 
             @php
-                $user = Auth::user(); // ambil data user yang sedang login
+                $user = Auth::user();
             @endphp
 
             <div class="mb-2">
@@ -49,9 +50,8 @@
                 <input type="text" id="input_kontak" name="kontak" value="{{ old('kontak') }}" required class="w-full border rounded px-3 py-2">
             </div>
 
-            {{-- Tambahkan data user ke dalam elemen sebagai data-* --}}
             <input type="hidden" id="user_name" value="{{ $user->user_name }}">
-            <input type="hidden" id="user_kontak" value="{{ $user->user_email }}"> {{-- pastikan ini ada di tabel users --}}
+            <input type="hidden" id="user_kontak" value="{{ $user->user_email }}"> 
 
 
             <h4 class="text-lg font-semibold text-green-600 mb-4">🛒 Ringkasan Belanja</h4>

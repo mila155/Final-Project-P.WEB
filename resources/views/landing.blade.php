@@ -1,4 +1,5 @@
 <x-layout>
+    <x-navbar></x-navbar>
     <x-slot:title>{{ $title }}</x-slot:title>
 
     <section class="px-4 py-12 mx-auto max-w-7xl bg-neutral-50 dark:bg-isidark">

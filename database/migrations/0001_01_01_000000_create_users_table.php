@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('user_password');
             $table->string('user_telp', 15)->nullable()->unique('telepon');
             $table->rememberToken();
-            // $table->timestamp('created_at')->useCurrent();
             $table->timestamps();
             $table->enum('role', ['admin', 'user', 'superadmin'])->default('user');
         });

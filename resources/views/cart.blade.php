@@ -1,4 +1,5 @@
 <x-layout>
+  <x-navbar></x-navbar>
   <x-slot:title>{{ $title }}</x-slot:title>
 
   <div class="container mx-auto my-10 py-10 px-4">
@@ -164,4 +165,32 @@
       </div>
     @endif
   </div>
+
+  @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end',
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: '{{ session('error') }}',
+                timer: 3000,
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end',
+            });
+        </script>
+    @endif
 </x-layout>

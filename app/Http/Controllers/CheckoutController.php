@@ -32,9 +32,8 @@ class CheckoutController extends Controller
             'kontak' => 'required|string',
         ]);
 
-        $userId = Auth::id(); // atau sesuaikan jika user_id disimpan di session
+        $userId = Auth::id(); 
 
-        // $keranjang = Keranjang::all();
         $keranjang = Keranjang::where('user_id', $userId)->get();
 
         $pesanan = Pesanan::create([
@@ -65,7 +64,7 @@ class CheckoutController extends Controller
             ]);
         }
 
-        Keranjang::where('user_id', $userId)->delete(); // kosongkan keranjang
+        Keranjang::where('user_id', $userId)->delete(); 
 
         return redirect('/')->with('success', 'Pesanan berhasil dilakukan!');
     }

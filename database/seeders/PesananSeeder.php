@@ -13,6 +13,6 @@ class PesananSeeder extends Seeder
      */
     public function run(): void
     {
-        Pesanan::factory(5)->create();
+        Pesanan::factory(20)->create();
     }
 }

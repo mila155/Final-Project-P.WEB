@@ -59,9 +59,13 @@ class CartController extends Controller
             $keranjang = Keranjang::where('kode_produk', $validated['kode_produk'])
                                 ->where('user_id', Auth::id())
                                 ->first();
-
             if ($keranjang) {
-                $keranjang->increment('jumlah', $validated['jumlah']);
+                // if(($keranjang->jumlah + $validated['jumlah']) <= $produk->stok_akhir){
+                if(($keranjang->jumlah + $validated['jumlah']) <= $produk->stok){
+                    $keranjang->increment('jumlah', $validated['jumlah']);
+                } else {
+                    return redirect()->back()->with('error', 'Jumlah melebihi stok yang tersedia.');                    
+                }
             } else {
                 Keranjang::create([
                     'kode_produk' => $validated['kode_produk'],
@@ -75,10 +79,15 @@ class CartController extends Controller
         } else {
             $cart = session()->get('cart', []);
 
-            $productId = $produk->id;
+            $productId = $produk->kode_produk;
 
             if (isset($cart[$productId])) {
+                // if (($cart[$productId]['quantity'] + $validated['jumlah']) <= $produk->stok_akhir) {
+                if (($cart[$productId]['quantity'] + $validated['jumlah']) <= $produk->stok) {
                 $cart[$productId]['quantity'] += $validated['jumlah'];
+                } else {
+                    return redirect()->back()->with('error', 'Jumlah melebihi stok yang tersedia.');                    
+                }
             } else {
                 $cart[$productId] = [
                     'name' => $produk->nama_produk,
@@ -90,7 +99,7 @@ class CartController extends Controller
 
             session()->put('cart', $cart);
         }
-        return redirect()->route('cart.index')->with('success', 'Produk ditambahkan ke keranjang!');
+         return redirect()->back()->with('success', 'Produk ditambahkan ke keranjang!');
     }
 
     public function update(Request $request, $id)
@@ -99,13 +108,19 @@ class CartController extends Controller
             'jumlah' => 'required|integer|min:1',
         ]);
         $keranjang = Keranjang::findOrFail($id);
-        $keranjang->update(['jumlah' => $validated['jumlah']]);
-        return redirect()->route('cart.index')->with('success', 'Produk berhasil diperbarui!');
+        $produk = Produk::where('kode_produk', $keranjang->kode_produk)->first();
+        // if(($validated['jumlah']) <= $produk->stok_akhir){
+        if(($validated['jumlah']) <= $produk->stok){
+                $keranjang->update(['jumlah' => $validated['jumlah']]);
+        } else {
+            return redirect()->back()->with('error', 'Jumlah melebihi stok yang tersedia.');                    
+        }        
+        return redirect()->back()->with('success', 'Produk berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
         Keranjang::destroy($id);
-        return redirect()->route('cart.index')->with('success', 'Produk dihapus dari keranjang!');;
+        return redirect()->back()->with('success', 'Produk dihapus dari keranjang!');;
     }
 }

@@ -27,7 +27,7 @@ class KeranjangFactory extends Factory
             'user_id' => User::where('role', 'user')->inRandomOrder()->value('user_id'),
             'nama' => $produk->nama_produk, 
             'harga' => $produk->harga_jual,
-            'jumlah' => fake()->numberBetween(1, 10),
+            'jumlah' => fake()->numberBetween(1, 3),
             'gambar' => $produk->foto,
         ];
     }

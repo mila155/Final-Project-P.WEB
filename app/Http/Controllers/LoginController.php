@@ -26,8 +26,8 @@ class LoginController extends Controller
             //     'role' => $user->role
             // ]);
 
-            Auth::login($user); // <-- ini kunci utamanya
-            $request->session()->regenerate(); // untuk keamanan
+            Auth::login($user); 
+            $request->session()->regenerate(); 
 
             if ($user->role === 'superadmin' || $user->role === 'admin') {
                 return redirect('/admin')->with('success', 'Login berhasil sebagai ' . ucfirst($user->role));
@@ -37,27 +37,6 @@ class LoginController extends Controller
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.'])->withInput();
-
-        // $credentials = $request->validate([
-        //     'user_email' => ['required', 'email'],
-        //     'password' => ['required'],
-        // ]);
-
-        // if (Auth::attempt($credentials)) {
-        //     $request->session()->regenerate();
-
-        //     $user = Auth::user();
-
-        //     if ($user->role === 'superadmin' || $user->role === 'admin') {
-        //         return redirect()->intended('/dashboardAdmin')->with('success', 'Login berhasil sebagai ' . ucfirst($user->role));
-        //     }
-
-        //     return redirect()->intended('/')->with('success', 'Login berhasil!');
-        // }
-
-        // return back()->withErrors([
-        //     'email' => 'Email atau password salah.',
-        // ])->onlyInput('email');
     }
 
     public function logout(Request $request)

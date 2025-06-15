@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Routing\Controller;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function dashboard()
     {
         $orders_total = DB::table('pesanan')->count();
         $orders_new = DB::table('pesanan')
@@ -45,7 +49,7 @@ class AdminController extends Controller
             ->limit(5)
             ->get();
 
-        return view('admin', [
+        return view('admin.admin', [
             'orders_total' => $orders_total,
             'orders_new' => $orders_new,
             'total_earning' => $total_earning,
@@ -54,5 +58,80 @@ class AdminController extends Controller
             'omzetData' => $omzetData,
             'produkData' => $produkData,
         ], ['title' => 'Admin Page']);
+    }
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Auth::check() || Auth::user()->role !== 'superadmin') {
+                return redirect()->route('admin')->with('error', 'Akses ditolak! Halaman ini hanya untuk Superadmin.');
+            }
+            return $next($request);
+        })->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    }
+    
+
+    public function index()
+    {
+        $admins = User::where('role', 'admin')->get();
+        return view('admin.admins.index', compact('admins'), ['title' => 'Kelola Admin']);
+    }
+
+    public function create()
+    {
+        return view('admin.admins.tambah', ['title' => 'Tambah Admin']);
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'user_name' => 'required|string|max:255',
+            'user_email' => 'required|email|unique:users,user_email',
+            'user_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        User::create([
+            'user_name' => $validated['user_name'],
+            'user_email' => $validated['user_email'],
+            'user_password' => Hash::make($validated['user_password']),
+            'role' => 'admin',
+        ]);
+
+        return redirect()->route('admins.index')->with('success', 'Admin berhasil ditambahkan.');
+    }
+
+    public function edit(User $user)
+    {
+        if ($user->role !== 'admin') {
+            return redirect()->route('admins.index')->with('error', 'Admin tidak ditemukan.');
+        }
+        return view('admin.admins.edit', compact('user'), ['title' => 'Edit Admin']);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        if ($user->role !== 'admin') {
+            return redirect()->route('admins.index')->with('error', 'Admin tidak ditemukan.');
+        }
+
+        $validated = $request->validate([
+            'user_name' => 'required|string|max:255',
+            'user_email' => 'required|email|unique:users,user_email,' . $user->user_id . ',user_id',
+        ]);
+
+        $user->update($validated);
+
+        return redirect()->route('admins.index')->with('success', 'Admin berhasil diperbarui.');
+    }
+
+    public function destroy(User $user)
+    {
+        if ($user->role !== 'admin') {
+            return redirect()->route('admins.index')->with('error', 'Admin tidak ditemukan.');
+        }
+
+        $user->delete();
+
+        return redirect()->route('admins.index')->with('success', 'Admin berhasil dihapus.');
     }
 }

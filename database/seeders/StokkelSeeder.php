@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Pesanan;
 use App\Models\PesananDetail;
 use App\Models\StokKeluar;
+use App\Models\Produk;
 
 class StokkelSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class StokkelSeeder extends Seeder
      */
     public function run(): void
     {
-        PesananDetail::all()->each(function ($detail) {
+        PesananDetail::with('pesanan')->get()->each(function ($detail) {
             StokKeluar::create([
                 'kode_produk' => $detail->kode_produk,
                 'pesanan_id' => $detail->pesanan_id,
@@ -23,6 +24,13 @@ class StokkelSeeder extends Seeder
                 'jumlah_keluar' => $detail->jumlah
             ]);
 
+            $produk = Produk::where('kode_produk', $detail->kode_produk)->first();
+
+            if ($produk) {
+                // $produk->stok_akhir -= $detail->jumlah;
+                $produk->stok -= $detail->jumlah;
+                $produk->save();
+            }
         });
     }
 }

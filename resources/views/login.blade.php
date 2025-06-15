@@ -1,4 +1,5 @@
 <x-layout>
+  <x-navbar></x-navbar>
   <x-slot:title>{{ $title }}</x-slot:title>
   
   <div class="flex h-screen items-center justify-center">

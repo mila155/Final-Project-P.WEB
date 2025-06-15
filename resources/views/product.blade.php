@@ -1,5 +1,6 @@
 <x-layout>
-   <x-slot:title>{{ $title }}</x-slot:title> 
+    <x-navbar></x-navbar>
+    <x-slot:title>{{ $title }}</x-slot:title> 
 
     <div class="container mx-auto my-10 pb-10 px-4">
         <div class="my-20">
@@ -22,12 +23,43 @@
                         <p class="text-green-600 font-bold">
                             Rp {{ number_format($produk->harga_jual, 0, ',', '.') }}
                         </p>
-                        <p>
+                        {{-- <p>
                             Berat: {{ $produk->kuantitas_produk }} {{ $satuan }}
-                        </p>
-                        <p>
-                            Stok: {{ $produk->stok_akhir }} pcs
-                        </p>
+                        </p> --}}
+                        {{-- @if ($produk->stok_akhir<6)                             --}}
+                        @if ($produk->stok<6)                            
+                            <p class="text-red-700">
+                                {{-- Stok: {{ $produk->stok_akhir }} pcs --}}
+                                Stok tersisa sedikit!
+                            </p>
+                        @endif
+
+                        {{-- @if (session('error'))
+                            <div class="bg-red-100 text-red-700 p-2 rounded mb-4">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+                        @if (session('success'))
+                            <div class="bg-green-100 text-green-700 p-2 rounded mb-4">
+                                {{ session('success') }}
+                            </div>
+                        @endif --}}
+                        
+                        <form action="{{ route('cart.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="kode_produk" value="{{ $produk->kode_produk }}">
+                            <input type="hidden" name="nama" value="{{ $produk->nama_produk }}">
+                            <input type="hidden" name="harga" value="{{ $produk->harga_jual }}">
+                            {{-- @if ($produk->stok_akhir) --}}
+                            @if ($produk->stok)
+                                <input type="hidden" name="jumlah" value=1>                               
+                            @else
+                            @endif
+                            <button type="submit" class="mt-4 inline-block bg-green-500 text-white p-2 rounded hover:bg-blue-600">
+                                Tambah ke keranjang
+                            </button>
+                        </form>
                         <a href="{{ route('detail', $produk->id) }}" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
                             Lihat Detail
                         </a>
@@ -36,4 +68,33 @@
             @endforeach
         </div>
     </div>
+    
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end',
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: '{{ session('error') }}',
+                timer: 3000,
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end',
+            });
+        </script>
+    @endif
+
 </x-layout>

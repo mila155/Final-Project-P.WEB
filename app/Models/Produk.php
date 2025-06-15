@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $satuan
  * @property string|null $deskripsi
  * @property string|null $foto
- * @property int|null $stok_akhir
  * 
  * @property Collection|Keranjang[] $keranjangs
  * @property Collection|PesananDetail[] $pesanan_details
@@ -34,7 +33,6 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
 	protected $table = 'produk';
-	// protected $primaryKey = 'kode_produk';
 	public $timestamps = false;
 
 	protected $casts = [
@@ -42,7 +40,7 @@ class Produk extends Model
 		'harga_jual' => 'float',
 		'harga_produksi' => 'int',
 		'kuantitas_produk' => 'int',
-		'stok_akhir' => 'int'
+		// 'stok_akhir' => 'int'
 	];
 
 	protected $fillable = [
@@ -55,7 +53,7 @@ class Produk extends Model
 		'satuan',
 		'deskripsi',
 		'foto',
-		'stok_akhir'
+		// 'stok_akhir'
 	];
 
 	public function keranjangs()
