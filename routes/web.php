@@ -9,6 +9,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\PaymentController;
 
 
 Route::get('/', function () {
@@ -54,6 +55,11 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/admins/{user}', [AdminController::class, 'update'])->name('admins.update');
     Route::delete('/admin/admins/{user}', [AdminController::class, 'destroy'])->name('admins.destroy');
 });
+
+// Route::middleware('auth')->group(function () {
+//     Route::post('/payments/initiate', [PaymentController::class, 'initiatePayment'])->name('payments.initiate');
+// });
+// Route::post('/payments/midtrans-notification', [PaymentController::class, 'handleCallback'])->name('payments.notification');
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin');
 
