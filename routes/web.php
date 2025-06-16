@@ -9,7 +9,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\KeuanganController;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
 
 
 Route::get('/', function () {
@@ -61,13 +61,22 @@ Route::middleware(['auth'])->group(function () {
 // });
 // Route::post('/payments/midtrans-notification', [PaymentController::class, 'handleCallback'])->name('payments.notification');
 
+// Route::middleware('auth')->group(function () {
+//     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+//     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+//     Route::get('/admin/orders', [OrderController::class, 'index'])->name('orders.index');
+//     Route::post('/admin/orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+// });
+
+Route::get('/payment/{pesanan_id}', [CheckoutController::class, 'showPaymentForm'])->name('payment.form');
+Route::post('/payment', [CheckoutController::class, 'storePayment'])->name('payment.store');
+
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
-
 
 Route::get('/checkout', [CheckoutController::class, 'showForm'])->name('checkout.form');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');

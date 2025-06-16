@@ -10,6 +10,7 @@ use App\Models\PesananDetail;
 use App\Models\Produk;
 use App\Models\StokKeluar;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
@@ -66,6 +67,38 @@ class CheckoutController extends Controller
 
         Keranjang::where('user_id', $userId)->delete(); 
 
-        return redirect('/')->with('success', 'Pesanan berhasil dilakukan!');
+        // return redirect('/')->with('success', 'Pesanan berhasil dilakukan!');
+        return redirect()->route('payment.form', ['pesanan_id' => $pesanan->id]);
+    }
+    public function showPaymentForm($pesanan_id)
+    {
+        $pesanan = Pesanan::findOrFail($pesanan_id);
+        $keranjang = Keranjang::where('user_id', Auth::id())->get();
+        $totalBayar = $pesanan->pesanan_details()->sum(DB::raw('harga * jumlah'));
+
+        return view('payment', compact('pesanan', 'keranjang', 'totalBayar') + ['title' => 'Payment Page']);
+    }
+
+    public function storePayment(Request $request)
+    {
+        $request->validate([
+            'pesanan_id' => 'required|exists:pesanan,id',
+            'metode_pembayaran' => 'required|in:bank_transfer,qris',
+            'bukti_pembayaran' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $pesanan = Pesanan::findOrFail($request->pesanan_id);
+
+        // Handle file upload
+        $file = $request->file('bukti_pembayaran');
+        $path = $file->store('bukti_pembayaran', 'public');
+
+        $pesanan->update([
+            'metode_pembayaran' => $request->metode_pembayaran,
+            'bukti_pembayaran' => $path,
+            'status_pembayaran' => 'pending', // Initial status
+        ]);
+
+        return redirect('/')->with('success', 'Pembayaran berhasil dikonfirmasi! Menunggu verifikasi.');
     }
 }

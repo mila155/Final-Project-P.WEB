@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Pesanan
@@ -42,7 +43,10 @@ class Pesanan extends Model
 		'nama',
 		'alamat',
 		'kontak',
-		'tanggal'
+		'tanggal',
+		'metode_pembayaran',
+        'bukti_pembayaran',
+        'status_pembayaran',
 	];
 
 	public function user()
@@ -64,6 +68,6 @@ class Pesanan extends Model
 	// Method untuk menghitung total harga pesanan
 	public function getTotalHargaAttribute()
 	{
-		return $this->pesanan_details()->sum(\DB::raw('harga * jumlah'));
+		return $this->pesanan_details()->sum(DB::raw('harga * jumlah'));
 	}
 }

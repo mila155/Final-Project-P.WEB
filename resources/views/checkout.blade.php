@@ -71,7 +71,6 @@
             </div>
 
             <div class="flex justify-between">
-                <a href="{{ route('cart.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded">&larr; Kembali ke Keranjang</a>
                 <button type="submit" class="bg-yellow-400 text-black font-semibold px-4 py-2 rounded">✔ Selesaikan Pesanan</button>
             </div>
         </form>
